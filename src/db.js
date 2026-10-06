@@ -5,7 +5,16 @@ const mysql = require('mysql2/promise');
 
 let pool = null;
 const FILE = path.join(__dirname, '..', 'data', 'anfragen.jsonl');
-const enabled = () => !!(process.env.DB_HOST && process.env.DB_USER && process.env.DB_NAME);
+// Hostinger legt beim Verbinden einer Datenbank teils eigene Variablennamen an, daher mehrere Schreibweisen.
+const env = (...keys) => keys.map((k) => process.env[k]).find((v) => v);
+const cfg = () => ({
+  host: env('DB_HOST', 'DATABASE_HOST', 'MYSQL_HOST') || 'localhost',
+  port: Number(env('DB_PORT', 'DATABASE_PORT', 'MYSQL_PORT') || 3306),
+  user: env('DB_USER', 'DB_USERNAME', 'DATABASE_USER', 'DATABASE_USERNAME', 'MYSQL_USER'),
+  password: env('DB_PASSWORD', 'DB_PASS', 'DATABASE_PASSWORD', 'MYSQL_PASSWORD'),
+  database: env('DB_NAME', 'DB_DATABASE', 'DATABASE_NAME', 'MYSQL_DATABASE'),
+});
+const enabled = () => { const c = cfg(); return !!(c.user && c.database); };
 
 async function init() {
   if (!enabled()) {
@@ -13,11 +22,7 @@ async function init() {
     return;
   }
   pool = mysql.createPool({
-    host: process.env.DB_HOST,
-    port: Number(process.env.DB_PORT || 3306),
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    ...cfg(),
     connectionLimit: 3,
     charset: 'utf8mb4',
   });
