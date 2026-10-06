@@ -30,16 +30,11 @@ Dazu kommen `/admin` (Liste aller Anfragen, mit Passwort) und die technischen Da
 
 ---
 
-## 2. Auf GitHub laden
+## 2. GitHub
 
-Hostinger holt sich die Website direkt von GitHub. Bei jedem Speichern wird sie dann neu veröffentlicht.
-
-1. Auf [github.com](https://github.com) anmelden und oben rechts auf **+ › New repository** klicken.
-2. Name: `stillgruen-website`, Sichtbarkeit **Private**, dann **Create repository**.
-3. Auf der folgenden Seite steht ein Kasten „…or push an existing repository“. Die Adresse
-   (`https://github.com/DEINNAME/stillgruen-website.git`) wird gebraucht.
-4. Die Dateien aus diesem Ordner hochladen. Am einfachsten über **Add file › Upload files**
-   im Browser: den gesamten Inhalt des Ordners `app` hineinziehen, **ohne** den Ordner `node_modules`.
+Die Website liegt im Repository [NopikaAI/stillgruen-website](https://github.com/NopikaAI/stillgruen-website),
+Zweig `main`. Hostinger holt sich die Website von dort. Jede Änderung, die auf `main`
+gespeichert wird, wird automatisch neu veröffentlicht.
 
 ---
 
