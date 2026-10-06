@@ -77,18 +77,23 @@ function widerrufsbelehrung() {
 <h2>Vorzeitiges Erlöschen</h2>
 <p>Das Widerrufsrecht erlischt bei einem Vertrag über Dienstleistungen, wenn ich die Dienstleistung vollständig erbracht habe und mit der Ausführung erst begonnen habe, nachdem Sie dazu Ihre ausdrückliche Zustimmung gegeben haben und gleichzeitig Ihre Kenntnis davon bestätigt haben, dass Sie Ihr Widerrufsrecht bei vollständiger Vertragserfüllung verlieren.</p>
 
-<h2>Muster-Widerrufsformular</h2>
-<p>Wenn Sie den Vertrag widerrufen wollen, dann füllen Sie bitte dieses Formular aus und senden Sie es zurück.</p>
-<div class="card">
+<h2>Widerruf online erklären</h2>
+<p>Am einfachsten widerrufen Sie direkt hier auf der Website. Sie erhalten sofort eine Eingangsbestätigung per E-Mail.</p>
+<p><a class="btn primary" href="/vertrag-widerrufen/">Vertrag widerrufen</a></p>
+
+<h2>Muster-Widerrufsformular zum Ausdrucken</h2>
+<p>Wenn Sie lieber per Brief oder E-Mail widerrufen möchten, können Sie dieses Formular ausdrucken, ausfüllen und an mich senden. Das Formular ist nicht vorgeschrieben.</p>
+<div class="card muster">
 <p>An ${esc(site.fullName)}, ${esc(site.owner)}, ${esc(site.street)}, ${esc(site.zip)} ${esc(site.city)}, E-Mail: ${esc(site.email)}:</p>
-<p>Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag über die Erbringung der folgenden Dienstleistung (*)</p>
-<p>Bestellt am (*) / erhalten am (*)</p>
-<p>Name des/der Verbraucher(s)</p>
-<p>Anschrift des/der Verbraucher(s)</p>
-<p>Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf Papier)</p>
-<p>Datum</p>
+<p>Hiermit widerrufe(n) ich/wir (*) den von mir/uns (*) abgeschlossenen Vertrag über die Erbringung der folgenden Dienstleistung (*)<span class="wl" aria-hidden="true"></span></p>
+<p>Bestellt am (*) / erhalten am (*)<span class="wl" aria-hidden="true"></span></p>
+<p>Name des/der Verbraucher(s)<span class="wl" aria-hidden="true"></span></p>
+<p>Anschrift des/der Verbraucher(s)<span class="wl" aria-hidden="true"></span><span class="wl" aria-hidden="true"></span></p>
+<p>Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf Papier)<span class="wl" aria-hidden="true"></span></p>
+<p>Datum<span class="wl" aria-hidden="true"></span></p>
 <p class="fine">(*) Unzutreffendes streichen.</p>
 </div>
+<p class="noprint"><button class="btn ghost" type="button" id="printBtn">Formular drucken</button></p>
 <p class="fine">Stand: ${STAND}</p>`);
 }
 

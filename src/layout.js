@@ -79,6 +79,6 @@ ${body}
 </body>
 </html>`;
 }
-layout.version = '2';
+layout.version = '3';
 
 module.exports = { layout, esc };

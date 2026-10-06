@@ -66,6 +66,8 @@
     document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
     mn.addEventListener('click',e=>{if(e.target.tagName==='A')close()});
   }
+  // Drucken (Muster-Widerrufsformular)
+  const pb=document.getElementById('printBtn'); if(pb) pb.addEventListener('click',()=>window.print());
   // Große Schrift
   const big=document.getElementById('big');
   try{if(localStorage.getItem('sg-big')==='1'){document.documentElement.classList.add('big');big.setAttribute('aria-pressed','true')}}catch(e){}

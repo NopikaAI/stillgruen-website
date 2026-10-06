@@ -214,3 +214,5 @@ footer small{grid-column:1/-1;color:#A6B0A9;border-top:1px solid #3E4A43;padding
 .row2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .field input,.field select,.field textarea{max-width:100%;min-width:0}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.muster .wl{display:block;border-bottom:1px solid var(--line);height:1.8em}
+@media print{header.top,footer,.wa,.skip,.noprint,.crumbs{display:none!important}.muster{border:0;padding:0}.muster .wl{border-color:#555}}
