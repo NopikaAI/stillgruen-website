@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { layout, esc } = require('./layout');
 const { site, prices, eur } = require('./data');
+const legal = require('./legal');
 
 const P = prices;
 const ZEICHEN = fs.readFileSync(path.join(__dirname, 'svg', 'stillgruen-zeichen-negativ.svg'), 'utf8')
@@ -281,6 +282,9 @@ function impressum() {
 <p>Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 <h2>Haftung für Links</h2>
 <p>Für die Inhalte verlinkter externer Seiten sind ausschließlich deren Betreiber verantwortlich. Bei Bekanntwerden von Rechtsverletzungen entferne ich solche Links umgehend.</p>
+<h2>Bildnachweis</h2>
+<p>Alle Fotos: ${esc(site.owner)}. Logo und Grafiken: ${esc(site.fullName)}.</p>
+${legal.kiHinweis}
 </div></div></section>`;
   return layout({ title: 'Impressum | Stillgrün', description: 'Impressum von Stillgrün – Grab- und Urnenpflege in Frankfurt am Main.', pathName: '/impressum/', body, noindex: false, schema: [] });
 }
@@ -288,19 +292,45 @@ function impressum() {
 function datenschutz() {
   const body = `<section><div class="in"><div class="prose">
 <h1>Datenschutzerklärung</h1>
+<p>Der Schutz Ihrer Daten ist mir wichtig. Hier erfahren Sie, welche Daten beim Besuch dieser Website und bei einer Zusammenarbeit verarbeitet werden, wozu und wie lange.</p>
+
 <h2>1. Verantwortliche</h2>
-<p>${esc(site.owner)}, ${esc(site.fullName)}, ${esc(site.street)}, ${esc(site.zip)} ${esc(site.city)}, E-Mail: <a href="mailto:${site.email}">${esc(site.email)}</a>, Telefon: ${esc(site.phone)}</p>
-<h2>2. Hosting und Server-Logdateien</h2>
-<p>Diese Website wird bei Hostinger International Ltd., 61 Lordou Vironos Street, 6023 Larnaka, Zypern, betrieben. Beim Aufruf der Seiten verarbeitet der Server technisch notwendige Daten wie IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browser und Betriebssystem. Das dient dem sicheren und stabilen Betrieb der Website (Art. 6 Abs. 1 lit. f DSGVO). Die Logdateien werden nach spätestens 30 Tagen gelöscht, sofern der Hoster nichts Kürzeres vorsieht. Mit dem Hoster besteht ein Vertrag zur Auftragsverarbeitung.</p>
-<h2>3. Kontaktformular, E-Mail und Telefon</h2>
-<p>Wenn Sie mir über das Formular, per E-Mail, Telefon oder WhatsApp schreiben, verarbeite ich Ihre Angaben (zum Beispiel Name, E-Mail, Telefon, Friedhof, Grabart und Nachricht), um Ihre Anfrage zu beantworten und ein Angebot zu erstellen (Art. 6 Abs. 1 lit. b DSGVO). Die Anfragen aus dem Formular werden in einer Datenbank beim Hoster gespeichert und per E-Mail an mich weitergeleitet. Kommt kein Auftrag zustande, lösche ich die Daten nach 6 Monaten. Bei einem Auftrag gelten die gesetzlichen Aufbewahrungsfristen.</p>
-<h2>4. WhatsApp</h2>
-<p>Wenn Sie den WhatsApp-Knopf nutzen, öffnet sich WhatsApp, ein Dienst der WhatsApp Ireland Limited. Erst dann werden Daten an WhatsApp übertragen. Fotoberichte verschicke ich per WhatsApp nur, wenn Sie das wünschen. Andernfalls erhalten Sie die Fotos per E-Mail.</p>
-<h2>5. Keine Cookies, kein Tracking</h2>
-<p>Diese Website setzt keine Cookies und verwendet keine Analyse- oder Werbedienste. Schriften und Bilder werden vom eigenen Server geladen. Die Einstellung „Schrift vergrößern“ wird nur lokal in Ihrem Browser gespeichert.</p>
-<h2>6. Ihre Rechte</h2>
-<p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch (Art. 15 bis 21 DSGVO). Eine Einwilligung können Sie jederzeit für die Zukunft widerrufen. Sie können sich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel beim Hessischen Beauftragten für Datenschutz und Informationsfreiheit, Gustav-Stresemann-Ring 1, 65189 Wiesbaden.</p>
-<p class="fine">Stand: ${new Date().toLocaleDateString('de-DE', { month: 'long', year: 'numeric' })}</p>
+<p>${esc(site.owner)}, ${esc(site.fullName)}, ${esc(site.street)}, ${esc(site.zip)} ${esc(site.city)}<br>E-Mail: <a href="mailto:${site.email}">${esc(site.email)}</a>, Telefon: ${esc(site.phone)}</p>
+<p>Eine Datenschutzbeauftragte oder einen Datenschutzbeauftragten muss ich nicht benennen.</p>
+
+<h2>2. Hosting, Server-Logdateien und Sicherheit</h2>
+<p>Diese Website, die Datenbank und das E-Mail-Postfach werden bei Hostinger International Ltd., 61 Lordou Vironos Street, 6023 Larnaka, Zypern, betrieben. Mit Hostinger besteht ein Vertrag zur Auftragsverarbeitung nach Art. 28 DSGVO. Zur schnellen und sicheren Auslieferung nutzt Hostinger ein Content Delivery Network (CDN) und einen Schutz vor Schadsoftware.</p>
+<p>Beim Aufruf der Seiten verarbeitet der Server technisch notwendige Daten: IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browser und Betriebssystem sowie die zuvor besuchte Seite. Das ist für die Auslieferung der Website und für ihren sicheren Betrieb erforderlich (Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an einer funktionierenden und sicheren Website). Die Logdateien werden nach spätestens 30 Tagen gelöscht, sofern der Hoster keine kürzere Frist vorsieht.</p>
+<p>Die Verbindung ist mit TLS (https) verschlüsselt.</p>
+
+<h2>3. Anfrageformular, E-Mail, Telefon</h2>
+<p>Wenn Sie mir über das Formular, per E-Mail oder Telefon schreiben, verarbeite ich Ihre Angaben (Name, E-Mail, auf Wunsch Telefon, Friedhof, Grabart, gewünschte Leistung und Nachricht), um Ihre Anfrage zu beantworten und Ihnen ein Angebot zu machen (Art. 6 Abs. 1 lit. b DSGVO, vorvertragliche Maßnahmen). Pflichtfelder sind Name und E-Mail, ohne sie kann ich nicht antworten.</p>
+<p>Die Anfragen werden in einer Datenbank bei Hostinger gespeichert und per E-Mail an mich weitergeleitet. Kommt kein Auftrag zustande, lösche ich die Daten spätestens 6 Monate nach dem letzten Kontakt.</p>
+<p>Zum Schutz vor Missbrauch wird die IP-Adresse kurzzeitig im Arbeitsspeicher gehalten, um zu viele Anfragen in kurzer Zeit zu begrenzen (Art. 6 Abs. 1 lit. f DSGVO). Sie wird nicht gespeichert.</p>
+
+<h2>4. Kündigung und Widerruf über die Website</h2>
+<p>Nutzen Sie die Schaltflächen „Verträge hier kündigen“ oder „Vertrag widerrufen“, verarbeite ich Ihre Angaben, um Ihre Erklärung zu bearbeiten und Ihnen den Eingang per E-Mail zu bestätigen (Art. 6 Abs. 1 lit. c DSGVO in Verbindung mit § 312k und § 356a BGB). Die Erklärung bewahre ich als Nachweis bis zum Ablauf der gesetzlichen Verjährungsfrist von drei Jahren auf.</p>
+
+<h2>5. Durchführung des Auftrags</h2>
+<p>Für einen Pflegeauftrag verarbeite ich Ihre Kontaktdaten, Rechnungsanschrift, die Angaben zum Grab und die Zahlungsdaten (Art. 6 Abs. 1 lit. b DSGVO). Bei Zahlung per SEPA-Lastschrift gebe ich Kontoinhaber, IBAN und Betrag an meine Bank weiter. Rechnungen und Buchungsbelege bewahre ich nach den steuer- und handelsrechtlichen Vorschriften auf (Art. 6 Abs. 1 lit. c DSGVO, § 147 AO, je nach Unterlage 6, 8 oder 10 Jahre).</p>
+<p><b>Fotobericht:</b> Nach jedem Besuch fotografiere ich das Grab und schicke Ihnen die Fotos. Die Fotos zeigen nur das Grab. Auf dem Grabstein stehen in der Regel Namen und Daten der verstorbenen Person. Diese sind nach der DSGVO nicht geschützt, ich gehe aber trotzdem vertraulich damit um. Die Fotos lösche ich spätestens 12 Monate nach Vertragsende. Für Werbung verwende ich Fotos nur mit Ihrer ausdrücklichen Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) und ohne lesbare Namen.</p>
+
+<h2>6. WhatsApp</h2>
+<p>Der WhatsApp-Knopf ist ein einfacher Link. Erst wenn Sie ihn anklicken, öffnet sich WhatsApp, ein Dienst der WhatsApp Ireland Limited, Merrion Road, Dublin 4, Irland. Dabei können Daten auch an die Muttergesellschaft Meta Platforms Inc. in den USA übermittelt werden. Die USA verfügen mit dem EU-US Data Privacy Framework über einen Angemessenheitsbeschluss der EU-Kommission. Fotoberichte schicke ich per WhatsApp nur, wenn Sie das ausdrücklich wünschen (Art. 6 Abs. 1 lit. a DSGVO). Andernfalls erhalten Sie die Fotos per E-Mail.</p>
+
+<h2>7. Keine Cookies, kein Tracking, keine KI-Dienste</h2>
+<p>Diese Website setzt keine Cookies und verwendet keine Analyse-, Werbe- oder Social-Media-Dienste. Schriften und Bilder werden vom eigenen Server geladen, es werden keine Daten an Google Fonts oder ähnliche Dienste übertragen.</p>
+<p>Wenn Sie die Schaltfläche „A+“ (Schrift vergrößern) nutzen, wird diese Einstellung nur in Ihrem Browser gespeichert (Local Storage). Sie wird nicht an mich übertragen. Die Speicherung ist für diese von Ihnen gewünschte Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können sie jederzeit in Ihrem Browser löschen.</p>
+<p>Ihre Daten werden nicht mit KI-Diensten verarbeitet, und es findet keine automatisierte Entscheidungsfindung oder Profilbildung statt (Art. 22 DSGVO). Mehr zum Einsatz von KI bei der Erstellung dieser Website steht im <a href="/impressum/#ki">Impressum</a>.</p>
+
+<h2>8. Empfänger</h2>
+<p>Ihre Daten erhalten nur, soweit nötig: Hostinger als Auftragsverarbeiter (Hosting, Datenbank, E-Mail), meine Bank (Zahlungen), meine Steuerberatung (Buchhaltung) sowie Behörden, wenn ich gesetzlich dazu verpflichtet bin. Ich verkaufe keine Daten und gebe sie nicht zu Werbezwecken weiter.</p>
+
+<h2>9. Ihre Rechte</h2>
+<p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20). Eine Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3). Eine kurze E-Mail an <a href="mailto:${site.email}">${esc(site.email)}</a> genügt.</p>
+<p><b>Widerspruchsrecht (Art. 21 DSGVO):</b> Verarbeite ich Daten auf Grundlage eines berechtigten Interesses, können Sie dem aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit widersprechen.</p>
+<p>Sie können sich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel beim Hessischen Beauftragten für Datenschutz und Informationsfreiheit, Postfach 3163, 65021 Wiesbaden, <a href="https://datenschutz.hessen.de" rel="noopener">datenschutz.hessen.de</a>.</p>
+<p class="fine">Stand: Oktober 2026</p>
 </div></div></section>`;
   return layout({ title: 'Datenschutzerklärung | Stillgrün', description: 'Datenschutzerklärung von Stillgrün – Grab- und Urnenpflege in Frankfurt am Main.', pathName: '/datenschutz/', body, schema: [] });
 }
@@ -321,6 +351,10 @@ const PAGES = {
   '/urnenpflege-frankfurt/': { render: urne, priority: '0.9' },
   '/impressum/': { render: impressum, priority: '0.2' },
   '/datenschutz/': { render: datenschutz, priority: '0.2' },
+  '/agb/': { render: legal.agb, priority: '0.2' },
+  '/widerrufsbelehrung/': { render: legal.widerrufsbelehrung, priority: '0.2' },
+  '/vertraege-kuendigen/': { render: () => legal.erklaerungForm('kuendigung'), priority: '0.1' },
+  '/vertrag-widerrufen/': { render: () => legal.erklaerungForm('widerruf'), priority: '0.1' },
 };
 
 module.exports = { PAGES, notFound };

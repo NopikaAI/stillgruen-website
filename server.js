@@ -9,6 +9,7 @@ const { site, prices } = require('./src/data');
 const db = require('./src/db');
 const mail = require('./src/mail');
 const admin = require('./src/admin');
+const legal = require('./src/legal');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -172,6 +173,48 @@ app.post('/api/anfrage', express.json({ limit: '20kb' }), express.urlencoded({ e
   try { sent = await mail.notify(a); } catch (e) { console.error('Mail-Fehler:', e.message); }
   if (!saved && !sent) return done(503, { ok: false, error: 'Die Anfrage konnte gerade nicht gespeichert werden.' });
   done(200, { ok: true });
+});
+
+// Kündigung und Widerruf (§ 312k und § 356a BGB): ohne JavaScript, Bestätigungsseite plus E-Mail
+app.post('/api/erklaerung', express.urlencoded({ extended: false, limit: '20kb' }), async (req, res) => {
+  const b = req.body || {};
+  const kind = b.art === 'widerruf' ? 'widerruf' : 'kuendigung';
+  const k = legal.ERKL[kind];
+  const fail = (status, msg) => res.status(status).type('html').send(
+    `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${k.label}</title><link rel="stylesheet" href="/css/site.css"><main style="padding:40px 20px;max-width:640px;margin:auto"><h1>Das hat nicht geklappt</h1><p>${msg}</p><p><a href="${k.path}">Zurück zum Formular</a> oder per E-Mail an <a href="mailto:${site.email}">${site.email}</a></p></main>`,
+  );
+  if (b.website) return res.redirect(303, k.path); // Spam-Falle
+  if (rateLimited(req.ip)) return fail(429, 'Zu viele Anfragen in kurzer Zeit. Bitte versuchen Sie es später noch einmal.');
+  const e = {
+    zeit: new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin', dateStyle: 'long', timeStyle: 'medium' }) + ' Uhr',
+    name: clip(b.name, 120),
+    email: clip(b.email, 160),
+    anschrift: clip(b.anschrift, 200),
+    vertrag: legal.VERTRAG.includes(b.vertrag) ? b.vertrag : legal.VERTRAG[0],
+    zuordnung: clip(b.zuordnung, 200),
+    kuendigungsart: b.kuendigungsart === 'außerordentliche Kündigung aus wichtigem Grund' ? b.kuendigungsart : 'ordentliche Kündigung',
+    zeitpunkt: b.zeitpunkt === 'Wunschtermin (bitte unten angeben)' ? b.zeitpunkt : 'nächstmöglichen Zeitpunkt',
+    datum: clip(b.datum, 40),
+    nachricht: clip(b.nachricht, 2000),
+  };
+  if (!e.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.email)) return fail(400, 'Bitte geben Sie Ihren Namen und eine gültige E-Mail-Adresse an.');
+  const rows = [
+    ['Art', k.label], ['Eingegangen am', e.zeit], ['Name', e.name], ['E-Mail', e.email], ['Anschrift', e.anschrift || '-'],
+    ['Vertrag', e.vertrag], ['Zuordnung', e.zuordnung || '-'],
+    ...(kind === 'kuendigung' ? [['Art der Kündigung', e.kuendigungsart], ['Zeitpunkt', e.zeitpunkt]] : [['Vertrag geschlossen am', e.datum || '-']]),
+    ['Nachricht', e.nachricht || '-'],
+  ];
+  let saved = false;
+  let mailed = false;
+  try {
+    saved = await db.saveAnfrage({
+      name: e.name, email: e.email, telefon: '', friedhof: e.zuordnung, grabart: '-',
+      leistung: `${k.label}: ${e.vertrag}`, nachricht: rows.map(([x, y]) => `${x}: ${y}`).join('\n'),
+    });
+  } catch (err) { console.error('DB-Fehler:', err.message); }
+  try { mailed = await mail.notifyErklaerung(k, e, rows); } catch (err) { console.error('Mail-Fehler:', err.message); }
+  if (!saved && !mailed) return fail(503, `${k.nom} konnte gerade nicht gespeichert werden. Bitte schicken Sie sie per E-Mail.`);
+  res.type('html').set('Cache-Control', 'no-store').send(legal.erklaerungDone(kind, e, mailed));
 });
 
 // Verwaltung der Anfragen (passwortgeschützt)

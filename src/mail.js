@@ -41,4 +41,42 @@ async function notify(a) {
   return true;
 }
 
-module.exports = { notify };
+// Kündigung oder Widerruf: Nachricht an Stillgrün und Eingangsbestätigung an die Kundin oder den Kunden.
+async function notifyErklaerung(k, e, rows) {
+  const label = k.label;
+  const t = getTransport();
+  if (!t) return false;
+  const to = process.env.MAIL_TO || process.env.SMTP_USER;
+  const table = rows.map(([a, b]) => `${a}: ${b}`).join('\n');
+  await t.sendMail({
+    from: `"Stillgrün Website" <${process.env.SMTP_USER}>`,
+    to,
+    replyTo: `"${e.name.replace(/"/g, '')}" <${e.email}>`,
+    subject: `${label} eingegangen – ${e.name}`,
+    text: `${label} über stillgrün.de\n\n${table}`,
+  });
+  await t.sendMail({
+    from: `"Stillgrün" <${process.env.SMTP_USER}>`,
+    to: e.email,
+    replyTo: to,
+    subject: `Eingangsbestätigung ${k.gen}`,
+    text: [
+      `Guten Tag ${e.name},`,
+      '',
+      `hiermit bestätige ich den Eingang ${k.gen} mit folgendem Inhalt:`,
+      '',
+      table,
+      '',
+      'Bei Fragen antworten Sie einfach auf diese E-Mail.',
+      '',
+      'Freundliche Grüße',
+      'Kerstin Leichtweiß',
+      'Stillgrün – Grab- und Urnenpflege',
+      'Dottenfeldstr. 22, 65936 Frankfurt am Main',
+      'kontakt@stillgruen.de · www.stillgrün.de',
+    ].join('\n'),
+  });
+  return true;
+}
+
+module.exports = { notify, notifyErklaerung };

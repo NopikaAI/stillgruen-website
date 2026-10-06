@@ -9,7 +9,7 @@ const { PAGES, notFound } = require('./src/pages');
 const { prices } = require('./src/data');
 
 const OUT = path.join(__dirname, 'export');
-const FILE = { '/': 'index.html', '/grabpflege-kosten/': 'grabpflege-kosten.html', '/grabpflege-frankfurt/': 'grabpflege-frankfurt.html', '/urnenpflege-frankfurt/': 'urnenpflege-frankfurt.html', '/impressum/': 'impressum.html', '/datenschutz/': 'datenschutz.html' };
+const FILE = { '/': 'index.html', '/grabpflege-kosten/': 'grabpflege-kosten.html', '/grabpflege-frankfurt/': 'grabpflege-frankfurt.html', '/urnenpflege-frankfurt/': 'urnenpflege-frankfurt.html', '/impressum/': 'impressum.html', '/datenschutz/': 'datenschutz.html', '/agb/': 'agb.html', '/widerrufsbelehrung/': 'widerrufsbelehrung.html', '/vertraege-kuendigen/': 'vertraege-kuendigen.html', '/vertrag-widerrufen/': 'vertrag-widerrufen.html' };
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
@@ -27,7 +27,7 @@ const rewrite = (html) => {
     if (p === '/') continue;
     h = h.split(`href="${p.slice(1)}"`).join(`href="${f}"`);
   }
-  return h.replace(/action="\/api\/anfrage"/g, 'action="#kontakt" data-preview="1"');
+  return h.replace(/action="\/api\/anfrage"/g, 'action="#kontakt" data-preview="1"').replace(/action="\/api\/erklaerung"/g, 'action="#" data-preview="1"');
 };
 
 for (const [p, v] of Object.entries(PAGES)) fs.writeFileSync(path.join(OUT, FILE[p]), rewrite(v.render()));
