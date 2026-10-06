@@ -74,7 +74,7 @@ ${body}
   <div style="display:grid;gap:6px;align-content:start"><b>Rechtliches</b><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a><a href="/agb/">AGB</a><a href="/widerrufsbelehrung/">Widerrufsbelehrung</a><a href="/vertraege-kuendigen/">Verträge hier kündigen</a><a href="/vertrag-widerrufen/">Vertrag widerrufen</a></div>
   <small>© ${new Date().getFullYear()} ${esc(site.fullName)} · ${esc(site.owner)} · Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Texte und Grafiken mit KI-Unterstützung erstellt und von der Inhaberin geprüft, Fotos echt (<a href="/impressum/#ki" style="color:inherit">KI-Hinweis</a>).</small>
 </div></footer>
-<a class="wa" href="https://wa.me/${site.phoneIntl.replace('+', '')}" rel="noopener" target="_blank" aria-label="Per WhatsApp schreiben"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>WhatsApp</a>
+<a class="wa" href="https://wa.me/${site.phoneIntl.replace('+', '')}?text=${encodeURIComponent('Guten Tag, ich interessiere mich für die Grabpflege von Stillgrün.')}" rel="noopener" target="_blank" aria-label="Per WhatsApp schreiben"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>WhatsApp</a>
 <script src="/js/site.js?v=${layout.version}" defer></script>
 </body>
 </html>`;
