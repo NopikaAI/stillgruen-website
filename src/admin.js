@@ -13,13 +13,17 @@ const safeEqual = (a, b) => {
 };
 
 router.use((req, res, next) => {
-  const user = process.env.ADMIN_USER;
-  const pass = process.env.ADMIN_PASSWORD;
+  const user = (process.env.ADMIN_USER || '').trim();
+  const pass = (process.env.ADMIN_PASSWORD || '').trim();
   if (!user || !pass) return res.status(503).type('text/plain').send('Die Verwaltung ist noch nicht eingerichtet (ADMIN_USER und ADMIN_PASSWORD fehlen).');
   const h = req.headers.authorization || '';
   if (h.startsWith('Basic ')) {
-    const [u, p] = Buffer.from(h.slice(6), 'base64').toString('utf8').split(':');
-    if (safeEqual(u, user) && safeEqual(p, pass)) return next();
+    // Nur am ersten Doppelpunkt trennen, damit Passwörter mit ":" funktionieren.
+    const raw = Buffer.from(h.slice(6), 'base64').toString('utf8');
+    const i = raw.indexOf(':');
+    const u = raw.slice(0, i).trim();
+    const p = raw.slice(i + 1);
+    if (i > 0 && safeEqual(u.toLowerCase(), user.toLowerCase()) && safeEqual(p, pass)) return next();
   }
   res.set('WWW-Authenticate', 'Basic realm="Stillgruen", charset="UTF-8"').status(401).type('text/plain').send('Bitte anmelden.');
 });
