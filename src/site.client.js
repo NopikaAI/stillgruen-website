@@ -68,6 +68,9 @@
   }
   // Drucken (Muster-Widerrufsformular)
   const pb=document.getElementById('printBtn'); if(pb) pb.addEventListener('click',()=>window.print());
+  // Cookie-Einstellungen: lokale Einstellung löschen
+  const cl=document.getElementById('clearLocal');
+  if(cl) cl.addEventListener('click',()=>{try{localStorage.removeItem('sg-big')}catch(e){}document.documentElement.classList.remove('big');const b=document.getElementById('big');if(b)b.setAttribute('aria-pressed','false');document.getElementById('clearMsg').textContent='Gelöscht. Auf diesem Gerät ist nichts mehr gespeichert.'});
   // Große Schrift
   const big=document.getElementById('big');
   try{if(localStorage.getItem('sg-big')==='1'){document.documentElement.classList.add('big');big.setAttribute('aria-pressed','true')}}catch(e){}

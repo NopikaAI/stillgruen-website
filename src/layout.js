@@ -71,7 +71,7 @@ ${body}
 <footer><div class="in">
   <div style="display:grid;gap:14px"><a class="logo" href="/" aria-label="Stillgrün Startseite">${LOGO_NEG}</a><p style="color:#C7D0CA">Verlässliche Grab- und Urnenpflege mit Fotobericht in Frankfurt am Main.</p></div>
   <div style="display:grid;gap:6px;align-content:start"><b>Angebot</b><a href="/grabpflege-frankfurt/">Grabpflege in Frankfurt</a><a href="/urnenpflege-frankfurt/">Urnenpflege in Frankfurt</a><a href="/grabpflege-kosten/">Grabpflege Kosten</a><a href="/#faq">Häufige Fragen</a><a href="/#kontakt">Kontakt</a></div>
-  <div style="display:grid;gap:6px;align-content:start"><b>Rechtliches</b><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a><a href="/agb/">AGB</a><a href="/widerrufsbelehrung/">Widerrufsbelehrung</a><a href="/vertraege-kuendigen/">Verträge hier kündigen</a><a href="/vertrag-widerrufen/">Vertrag widerrufen</a></div>
+  <div style="display:grid;gap:6px;align-content:start"><b>Rechtliches</b><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a><a href="/datenschutz/#cookies">Cookie-Einstellungen</a><a href="/agb/">AGB</a><a href="/widerrufsbelehrung/">Widerrufsbelehrung</a><a href="/vertraege-kuendigen/">Verträge hier kündigen</a><a href="/vertrag-widerrufen/">Vertrag widerrufen</a></div>
   <small>© ${new Date().getFullYear()} ${esc(site.fullName)} · ${esc(site.owner)} · Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Texte und Grafiken mit KI-Unterstützung erstellt und von der Inhaberin geprüft, Fotos echt (<a href="/impressum/#ki" style="color:inherit">KI-Hinweis</a>).</small>
 </div></footer>
 <a class="wa" href="https://wa.me/${site.phoneIntl.replace('+', '')}?text=${encodeURIComponent('Guten Tag, ich interessiere mich für die Grabpflege von Stillgrün.')}" rel="noopener" target="_blank" aria-label="Per WhatsApp schreiben"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>WhatsApp</a>
@@ -79,6 +79,6 @@ ${body}
 </body>
 </html>`;
 }
-layout.version = '3';
+layout.version = '4';
 
 module.exports = { layout, esc };

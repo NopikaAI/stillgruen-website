@@ -318,9 +318,11 @@ function datenschutz() {
 <h2>6. WhatsApp</h2>
 <p>Der WhatsApp-Knopf ist ein einfacher Link. Erst wenn Sie ihn anklicken, öffnet sich WhatsApp, ein Dienst der WhatsApp Ireland Limited, Merrion Road, Dublin 4, Irland. Dabei können Daten auch an die Muttergesellschaft Meta Platforms Inc. in den USA übermittelt werden. Die USA verfügen mit dem EU-US Data Privacy Framework über einen Angemessenheitsbeschluss der EU-Kommission. Fotoberichte schicke ich per WhatsApp nur, wenn Sie das ausdrücklich wünschen (Art. 6 Abs. 1 lit. a DSGVO). Andernfalls erhalten Sie die Fotos per E-Mail.</p>
 
-<h2>7. Keine Cookies, kein Tracking, keine KI-Dienste</h2>
+<h2 id="cookies">7. Cookie-Einstellungen: keine Cookies, kein Tracking, keine KI-Dienste</h2>
 <p>Diese Website setzt keine Cookies und verwendet keine Analyse-, Werbe- oder Social-Media-Dienste. Schriften und Bilder werden vom eigenen Server geladen, es werden keine Daten an Google Fonts oder ähnliche Dienste übertragen.</p>
-<p>Wenn Sie die Schaltfläche „A+“ (Schrift vergrößern) nutzen, wird diese Einstellung nur in Ihrem Browser gespeichert (Local Storage). Sie wird nicht an mich übertragen. Die Speicherung ist für diese von Ihnen gewünschte Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können sie jederzeit in Ihrem Browser löschen.</p>
+<p>Wenn Sie die Schaltfläche „A+“ (Schrift vergrößern) nutzen, wird diese Einstellung nur in Ihrem Browser gespeichert (Local Storage). Sie wird nicht an mich übertragen. Die Speicherung ist für diese von Ihnen gewünschte Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können sie jederzeit hier löschen:</p>
+<p><button class="btn ghost" type="button" id="clearLocal">Gespeicherte Einstellung löschen</button> <span id="clearMsg" role="status" class="muted"></span></p>
+<p>Da keine Cookies und keine einwilligungspflichtigen Dienste eingesetzt werden, ist kein Cookie-Banner nötig. Sollte sich das ändern, frage ich vorher um Ihre Einwilligung.</p>
 <p>Ihre Daten werden nicht mit KI-Diensten verarbeitet, und es findet keine automatisierte Entscheidungsfindung oder Profilbildung statt (Art. 22 DSGVO). Mehr zum Einsatz von KI bei der Erstellung dieser Website steht im <a href="/impressum/#ki">Impressum</a>.</p>
 
 <h2>8. Empfänger</h2>
