@@ -24,6 +24,14 @@ const prices = {
   giessUrlaub: 59,
 };
 
+// Google Analytics und Google Ads: bleiben aus, bis die IDs bei Hostinger als Umgebungsvariablen eingetragen sind.
+// Sobald eine ID gesetzt ist, erscheint das Einwilligungs-Banner. Ohne Einwilligung wird nichts von Google geladen.
+const tracking = {
+  ga: (process.env.GA_ID || '').trim(),          // z. B. G-XXXXXXXXXX
+  ads: (process.env.GOOGLE_ADS_ID || '').trim(), // z. B. AW-123456789
+};
+tracking.enabled = !!(tracking.ga || tracking.ads);
+
 const eur = (v) => v.toLocaleString('de-DE') + ' €';
 
-module.exports = { site, prices, eur };
+module.exports = { site, prices, eur, tracking };

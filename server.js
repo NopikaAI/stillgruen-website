@@ -5,7 +5,7 @@ const fs = require('fs');
 const express = require('express');
 const compression = require('compression');
 const { PAGES, notFound } = require('./src/pages');
-const { site, prices } = require('./src/data');
+const { site, prices, tracking } = require('./src/data');
 const db = require('./src/db');
 const mail = require('./src/mail');
 const admin = require('./src/admin');
@@ -20,6 +20,9 @@ app.disable('x-powered-by');
 app.set('trust proxy', true);
 app.use(compression());
 
+// Sicherheits-Header. Google-Adressen nur, wenn Analytics oder Ads eingerichtet sind (geladen wird erst nach Einwilligung).
+const G = tracking.enabled ? ' https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net https://www.google.com https://www.google.de https://googleads.g.doubleclick.net' : '';
+const CSP = `default-src 'self'; img-src 'self' data:${G}; style-src 'self' 'unsafe-inline'; script-src 'self'${tracking.enabled ? ' https://www.googletagmanager.com https://www.googleadservices.com' : ''}; font-src 'self'; connect-src 'self'${G}; frame-src 'self'${tracking.enabled ? ' https://td.doubleclick.net https://www.googletagmanager.com' : ''}; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'`;
 // Sicherheits-Header
 app.use((req, res, next) => {
   res.set({
@@ -27,7 +30,7 @@ app.use((req, res, next) => {
     'Referrer-Policy': 'strict-origin-when-cross-origin',
     'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
     'X-Frame-Options': 'DENY',
-    'Content-Security-Policy': "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'",
+    'Content-Security-Policy': CSP,
   });
   if (PROD) res.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
   next();

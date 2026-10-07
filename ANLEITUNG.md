@@ -127,3 +127,21 @@ noch selbst erledigen:
    einrichten, Domain bestätigen und `https://www.stillgrün.de/sitemap.xml` einreichen.
 3. **Bing Webmaster Tools** ebenfalls einrichten. Bing versorgt unter anderem ChatGPT mit Suchergebnissen.
 4. **Erste Bewertungen sammeln.** Bewertungen im Google-Profil wirken stärker als jeder Text auf der Website.
+
+---
+
+## 10. Google Analytics und Google Ads einschalten
+
+Das Einwilligungs-Banner ist schon eingebaut, aber ausgeschaltet. Solange keine ID eingetragen ist,
+erscheint kein Banner und es wird nichts von Google geladen.
+
+1. Bei [analytics.google.com](https://analytics.google.com) eine Property für `https://www.stillgrün.de`
+   anlegen. Google zeigt eine **Mess-ID** im Format `G-XXXXXXXXXX`.
+2. Für Werbung: Bei [ads.google.com](https://ads.google.com) eine Conversion-Aktion anlegen. Die
+   **Conversion-ID** hat das Format `AW-123456789`.
+3. Bei Hostinger unter **Umgebungsvariablen** eintragen: `GA_ID` und/oder `GOOGLE_ADS_ID`.
+   Danach neu bereitstellen.
+4. Das Banner erscheint jetzt beim ersten Besuch. Google wird erst nach „Alle akzeptieren“ oder
+   einer Auswahl unter „Einstellungen“ geladen. Die Datenschutzerklärung passt sich automatisch an.
+5. In Google Analytics unter **Verwaltung › Datenaufbewahrung** 14 Monate einstellen und den
+   Vertrag zur Auftragsverarbeitung akzeptieren (Verwaltung › Kontodetails).

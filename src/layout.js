@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { site } = require('./data');
+const { site, tracking } = require('./data');
 
 const clean = (file) => {
   let t = fs.readFileSync(path.join(__dirname, 'svg', file), 'utf8');
@@ -21,6 +21,21 @@ const NAV = [
   ['/#faq', 'Fragen'],
   ['/#kontakt', 'Kontakt'],
 ];
+
+// Einwilligungs-Banner (nur aktiv, wenn GA_ID oder GOOGLE_ADS_ID gesetzt ist)
+function consentBanner() {
+  const opts = [
+    tracking.ga ? '<label class="chk"><input type="checkbox" id="cStats">Statistik: Google Analytics zählt anonym, welche Seiten besucht werden.</label>' : '',
+    tracking.ads ? '<label class="chk"><input type="checkbox" id="cAds">Marketing: Google Ads misst, ob eine Anzeige zu einer Anfrage geführt hat.</label>' : '',
+  ].join('');
+  return `<div class="consent" id="consent" role="dialog" aria-modal="false" aria-labelledby="consentT" hidden data-ga="${esc(tracking.ga)}" data-ads="${esc(tracking.ads)}">
+<p class="h3" id="consentT">Ihre Einwilligung</p>
+<p>Mit Ihrer Einwilligung nutze ich Dienste von Google, um zu verstehen, wie die Website genutzt wird${tracking.ads ? ', und um Anzeigen zu messen' : ''}. Dabei können Daten in die USA übertragen werden. Sie können Ihre Auswahl jederzeit unter „Cookie-Einstellungen“ unten auf jeder Seite ändern. Mehr in der <a href="/datenschutz/#cookies">Datenschutzerklärung</a> und im <a href="/impressum/">Impressum</a>.</p>
+<div class="consent-opts" id="consentOpts" hidden><label class="chk"><input type="checkbox" checked disabled>Notwendig: technisch erforderlich, immer aktiv.</label>${opts}</div>
+<div class="consent-btns"><button type="button" class="btn primary" id="cAll">Alle akzeptieren</button><button type="button" class="btn primary" id="cNone">Nur notwendige</button><button type="button" class="btn ghost" id="cMore" aria-expanded="false" aria-controls="consentOpts">Einstellungen</button><button type="button" class="btn ghost" id="cSave" hidden>Auswahl speichern</button></div>
+</div>
+<script src="/js/consent.js?v=${layout.version}" defer></script>`;
+}
 
 function layout({ title, description, pathName, body, schema = [], noindex = false, ogType = 'website' }) {
   const canonical = site.url + pathName;
@@ -71,14 +86,15 @@ ${body}
 <footer><div class="in">
   <div style="display:grid;gap:14px"><a class="logo" href="/" aria-label="Stillgrün Startseite">${LOGO_NEG}</a><p style="color:#C7D0CA">Verlässliche Grab- und Urnenpflege mit Fotobericht in Frankfurt am Main.</p></div>
   <div style="display:grid;gap:6px;align-content:start"><b>Angebot</b><a href="/grabpflege-frankfurt/">Grabpflege in Frankfurt</a><a href="/urnenpflege-frankfurt/">Urnenpflege in Frankfurt</a><a href="/grabpflege-kosten/">Grabpflege Kosten</a><a href="/#faq">Häufige Fragen</a><a href="/#kontakt">Kontakt</a></div>
-  <div style="display:grid;gap:6px;align-content:start"><b>Rechtliches</b><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a><a href="/datenschutz/#cookies">Cookie-Einstellungen</a><a href="/agb/">AGB</a><a href="/widerrufsbelehrung/">Widerrufsbelehrung</a><a href="/vertraege-kuendigen/">Verträge hier kündigen</a><a href="/vertrag-widerrufen/">Vertrag widerrufen</a></div>
+  <div style="display:grid;gap:6px;align-content:start"><b>Rechtliches</b><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a><a href="/datenschutz/#cookies" data-consent-open>Cookie-Einstellungen</a><a href="/agb/">AGB</a><a href="/widerrufsbelehrung/">Widerrufsbelehrung</a><a href="/vertraege-kuendigen/">Verträge hier kündigen</a><a href="/vertrag-widerrufen/">Vertrag widerrufen</a></div>
   <small>© ${new Date().getFullYear()} ${esc(site.fullName)} · ${esc(site.owner)} · Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Texte und Grafiken mit KI-Unterstützung erstellt und von der Inhaberin geprüft, Fotos echt (<a href="/impressum/#ki" style="color:inherit">KI-Hinweis</a>).</small>
 </div></footer>
 <a class="wa" href="https://wa.me/${site.phoneIntl.replace('+', '')}?text=${encodeURIComponent('Guten Tag, ich interessiere mich für die Grabpflege von Stillgrün.')}" rel="noopener" target="_blank" aria-label="Per WhatsApp schreiben"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>WhatsApp</a>
+${tracking.enabled ? consentBanner() : ''}
 <script src="/js/site.js?v=${layout.version}" defer></script>
 </body>
 </html>`;
 }
-layout.version = '4';
+layout.version = '5';
 
 module.exports = { layout, esc };

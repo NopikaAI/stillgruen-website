@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { layout, esc } = require('./layout');
-const { site, prices, eur } = require('./data');
+const { site, prices, eur, tracking } = require('./data');
 const legal = require('./legal');
 
 const P = prices;
@@ -289,6 +289,21 @@ ${legal.kiHinweis}
   return layout({ title: 'Impressum | Stillgrün', description: 'Impressum von Stillgrün – Grab- und Urnenpflege in Frankfurt am Main.', pathName: '/impressum/', body, noindex: false, schema: [] });
 }
 
+const lokalHinweis = `<p>Wenn Sie die Schaltfläche „A+“ (Schrift vergrößern) nutzen, wird diese Einstellung nur in Ihrem Browser gespeichert (Local Storage). Sie wird nicht an mich übertragen. Die Speicherung ist für diese von Ihnen gewünschte Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können sie jederzeit hier löschen:</p>
+<p><button class="btn ghost" type="button" id="clearLocal">Gespeicherte Einstellung löschen</button> <span id="clearMsg" role="status" class="muted"></span></p>`;
+
+// Wird nur angezeigt, wenn GA_ID oder GOOGLE_ADS_ID gesetzt ist.
+function cookiesMitGoogle() {
+  return `<h2 id="cookies">7. Cookie-Einstellungen, Google Analytics und Google Ads</h2>
+<p>Schriften und Bilder werden vom eigenen Server geladen. Dienste von Google nutze ich nur, wenn Sie im Einwilligungs-Banner zustimmen (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Ohne Ihre Zustimmung wird nichts von Google geladen. Ihre Auswahl können Sie jederzeit ändern oder widerrufen:</p>
+<p><button class="btn primary" type="button" data-consent-open>Cookie-Einstellungen öffnen</button></p>
+${tracking.ga ? `<p><b>Google Analytics 4</b> (Statistik): zählt, welche Seiten aufgerufen werden, wie lange und von welchem Gerätetyp, damit ich die Website verbessern kann. Die IP-Adresse wird gekürzt. Dabei werden Cookies (zum Beispiel „_ga“) gesetzt; die Daten werden nach 14 Monaten gelöscht.</p>` : ''}
+${tracking.ads ? `<p><b>Google Ads Conversion-Messung</b> (Marketing): misst, ob jemand nach dem Klick auf eine meiner Anzeigen eine Anfrage gestellt hat. Dafür werden Cookies (zum Beispiel „_gcl_au“) gesetzt. Personalisierte Werbung wird nicht aktiviert.</p>` : ''}
+<p>Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Daten können an Google LLC in den USA übertragen werden. Google ist unter dem EU-US Data Privacy Framework zertifiziert. Mit Google besteht eine Vereinbarung zur Auftragsverarbeitung. Mehr unter <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a>.</p>
+<p>Ihre Auswahl im Banner wird in Ihrem Browser gespeichert (Local Storage), damit das Banner nicht bei jedem Seitenaufruf erscheint (§ 25 Abs. 2 Nr. 2 TDDDG).</p>
+${lokalHinweis}`;
+}
+
 function datenschutz() {
   const body = `<section><div class="in"><div class="prose">
 <h1>Datenschutzerklärung</h1>
@@ -318,12 +333,11 @@ function datenschutz() {
 <h2>6. WhatsApp</h2>
 <p>Der WhatsApp-Knopf ist ein einfacher Link. Erst wenn Sie ihn anklicken, öffnet sich WhatsApp, ein Dienst der WhatsApp Ireland Limited, Merrion Road, Dublin 4, Irland. Dabei können Daten auch an die Muttergesellschaft Meta Platforms Inc. in den USA übermittelt werden. Die USA verfügen mit dem EU-US Data Privacy Framework über einen Angemessenheitsbeschluss der EU-Kommission. Fotoberichte schicke ich per WhatsApp nur, wenn Sie das ausdrücklich wünschen (Art. 6 Abs. 1 lit. a DSGVO). Andernfalls erhalten Sie die Fotos per E-Mail.</p>
 
-<h2 id="cookies">7. Cookie-Einstellungen: keine Cookies, kein Tracking, keine KI-Dienste</h2>
+${tracking.enabled ? cookiesMitGoogle() : `<h2 id="cookies">7. Cookie-Einstellungen: keine Cookies, kein Tracking, keine KI-Dienste</h2>
 <p>Diese Website setzt keine Cookies und verwendet keine Analyse-, Werbe- oder Social-Media-Dienste. Schriften und Bilder werden vom eigenen Server geladen, es werden keine Daten an Google Fonts oder ähnliche Dienste übertragen.</p>
-<p>Wenn Sie die Schaltfläche „A+“ (Schrift vergrößern) nutzen, wird diese Einstellung nur in Ihrem Browser gespeichert (Local Storage). Sie wird nicht an mich übertragen. Die Speicherung ist für diese von Ihnen gewünschte Funktion unbedingt erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können sie jederzeit hier löschen:</p>
-<p><button class="btn ghost" type="button" id="clearLocal">Gespeicherte Einstellung löschen</button> <span id="clearMsg" role="status" class="muted"></span></p>
-<p>Da keine Cookies und keine einwilligungspflichtigen Dienste eingesetzt werden, ist kein Cookie-Banner nötig. Sollte sich das ändern, frage ich vorher um Ihre Einwilligung.</p>
-<p>Ihre Daten werden nicht mit KI-Diensten verarbeitet, und es findet keine automatisierte Entscheidungsfindung oder Profilbildung statt (Art. 22 DSGVO). Mehr zum Einsatz von KI bei der Erstellung dieser Website steht im <a href="/impressum/#ki">Impressum</a>.</p>
+${lokalHinweis}
+<p>Da keine Cookies und keine einwilligungspflichtigen Dienste eingesetzt werden, ist kein Cookie-Banner nötig. Sollte sich das ändern, frage ich vorher um Ihre Einwilligung.</p>`}
+<p>Ihre Daten werden nicht mit KI-Diensten verarbeitet, und es findet keine automatisierte Entscheidungsfindung statt (Art. 22 DSGVO). Mehr zum Einsatz von KI bei der Erstellung dieser Website steht im <a href="/impressum/#ki">Impressum</a>.</p>
 
 <h2>8. Empfänger</h2>
 <p>Ihre Daten erhalten nur, soweit nötig: Hostinger als Auftragsverarbeiter (Hosting, Datenbank, E-Mail), meine Bank (Zahlungen), meine Steuerberatung (Buchhaltung) sowie Behörden, wenn ich gesetzlich dazu verpflichtet bin. Ich verkaufe keine Daten und gebe sie nicht zu Werbezwecken weiter.</p>
