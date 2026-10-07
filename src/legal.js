@@ -3,7 +3,7 @@ const { layout, esc } = require('./layout');
 const { site } = require('./data');
 
 const STAND = 'Oktober 2026';
-const addr = `${esc(site.fullName)}, Inhaberin ${esc(site.owner)}, ${esc(site.street)}, ${esc(site.zip)} ${esc(site.city)}, E-Mail: <a href="mailto:${site.email}">${esc(site.email)}</a>`;
+const addr = `${esc(site.fullName)}, Inhaberin ${esc(site.owner)}, ${esc(site.street)}, ${esc(site.zip)} ${esc(site.city)}, E-Mail: <a href="mailto:${site.emailAscii}">${esc(site.email)}</a>`;
 const page = (title, h1, description, pathName, inner) => layout({
   title, description, pathName,
   body: `<section><div class="in"><div class="prose">\n<h1>${h1}</h1>\n${inner}\n</div></div></section>`,
@@ -141,7 +141,7 @@ function erklaerungForm(kind) {
   <div class="field"><label for="em">${kuend ? 'Grund oder Wunschtermin (optional)' : 'Nachricht (optional)'}</label><textarea id="em" name="nachricht" maxlength="2000"></textarea></div>
   <div class="hp" aria-hidden="true"><label for="ew">Website</label><input id="ew" name="website" type="text" tabindex="-1" autocomplete="off"></div>
   <button class="btn primary" type="submit" style="justify-self:start">${k.button}</button>
-  <p class="fine">Ihre Angaben verwende ich nur zur Bearbeitung ${k.gen}. Mehr dazu in der <a href="/datenschutz/">Datenschutzerklärung</a>. Alternativ erreichen Sie mich per E-Mail an <a href="mailto:${site.email}">${esc(site.email)}</a>.</p>
+  <p class="fine">Ihre Angaben verwende ich nur zur Bearbeitung ${k.gen}. Mehr dazu in der <a href="/datenschutz/">Datenschutzerklärung</a>. Alternativ erreichen Sie mich per E-Mail an <a href="mailto:${site.emailAscii}">${esc(site.email)}</a>.</p>
 </form>`);
 }
 

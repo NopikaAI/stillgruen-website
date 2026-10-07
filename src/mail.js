@@ -73,7 +73,7 @@ async function notifyErklaerung(k, e, rows) {
       'Kerstin Leichtweiß',
       'Stillgrün – Grab- und Urnenpflege',
       'Dottenfeldstr. 22, 65936 Frankfurt am Main',
-      'kontakt@stillgruen.de · www.stillgrün.de',
+      'kontakt@stillgrün.de · www.stillgrün.de',
     ].join('\n'),
   });
   return true;

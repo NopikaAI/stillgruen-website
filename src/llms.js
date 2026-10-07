@@ -9,7 +9,7 @@ module.exports = () => `# ${site.fullName}
 
 ## Kontakt
 - Telefon und WhatsApp: ${site.phone}
-- E-Mail: ${site.email}
+- E-Mail: ${site.email} (${site.emailAscii})
 - Anschrift: ${site.street}, ${site.zip} ${site.city}
 - Website: ${site.url}/
 

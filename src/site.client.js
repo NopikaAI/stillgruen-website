@@ -54,7 +54,7 @@
       fm.reset();
     }catch(err){
       ok.classList.add('err');
-      ok.textContent=(err.message&&err.message!=='Fehler'&&err.message!=='Failed to fetch'?err.message+' ':'Die Anfrage konnte gerade nicht gesendet werden. ')+'Sie erreichen mich auch per E-Mail an kontakt@stillgruen.de.';
+      ok.textContent=(err.message&&err.message!=='Fehler'&&err.message!=='Failed to fetch'?err.message+' ':'Die Anfrage konnte gerade nicht gesendet werden. ')+'Sie erreichen mich auch per E-Mail an kontakt@stillgrün.de.';
     }finally{ok.hidden=false;btn.disabled=false;}
   });}
   // Mobiles Menü

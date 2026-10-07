@@ -45,7 +45,7 @@ gespeichert wird, wird automatisch neu veröffentlicht.
 2. Als Startbefehl wird `npm start` verwendet, als Node-Version **20 oder neuer**.
 3. Bei **Umgebungsvariablen** die Werte aus `.env.example` eintragen (siehe Punkt 4 und 5).
 4. Nach dem ersten Start die Domain `stillgrün.de` zuweisen und bei Hostinger
-   **stillgruen.de auf www.stillgrün.de weiterleiten** lassen.
+   stillgrün.de ohne www leitet die Website selbst auf www.stillgrün.de weiter.
 5. SSL-Zertifikat (https) aktivieren. Das ist bei Hostinger kostenlos.
 
 ---
@@ -66,8 +66,8 @@ Datei `data/anfragen.jsonl`, damit nichts verloren geht.
 
 Damit jede Anfrage sofort als E-Mail ankommt:
 
-1. Bei Hostinger unter **E-Mails** das Postfach `kontakt@stillgruen.de` anlegen.
-2. Die Werte `SMTP_HOST=smtp.hostinger.com`, `SMTP_PORT=465`, `SMTP_USER=kontakt@stillgruen.de`
+1. Bei Hostinger unter **E-Mails** das Postfach `kontakt@stillgrün.de` anlegen.
+2. Die Werte `SMTP_HOST=smtp.hostinger.com`, `SMTP_PORT=465`, `SMTP_USER=kontakt@xn--stillgrn-d6a.de`
    und `SMTP_PASSWORD=<Passwort des Postfachs>` als Umgebungsvariablen eintragen.
 3. `MAIL_TO` legt fest, wohin die Benachrichtigung geht.
 

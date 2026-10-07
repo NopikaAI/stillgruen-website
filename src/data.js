@@ -9,7 +9,9 @@ const site = {
   district: 'Sossenheim',
   phone: '0151 43168278',
   phoneIntl: '+4915143168278',
-  email: 'kontakt@stillgruen.de',
+  email: 'kontakt@stillgrün.de',
+  // Gleiche Adresse in Computerschreibweise, für mailto-Links und strukturierte Daten (funktioniert in jedem E-Mail-Programm).
+  emailAscii: 'kontakt@xn--stillgrn-d6a.de',
   // Hauptdomain mit Umlaut. Für Links und Suchmaschinen wird die Punycode-Form genutzt.
   domain: 'stillgrün.de',
   url: process.env.SITE_URL || 'https://www.xn--stillgrn-d6a.de',

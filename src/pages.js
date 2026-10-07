@@ -52,7 +52,7 @@ const business = {
   logo: site.url + '/img/logo.png',
   image: [site.url + '/img/og-stillgruen.png', site.url + '/img/nachher.jpg'],
   telephone: site.phoneIntl,
-  email: site.email,
+  email: site.emailAscii,
   address: { '@type': 'PostalAddress', streetAddress: site.street, postalCode: site.zip, addressLocality: site.city, addressRegion: 'Hessen', addressCountry: 'DE' },
   areaServed: [{ '@type': 'City', name: 'Frankfurt am Main', sameAs: 'https://de.wikipedia.org/wiki/Frankfurt_am_Main' }],
   priceRange: `${P.urne.jahr}–${P.doppel.monat} € pro Monat`,
@@ -273,7 +273,7 @@ function impressum() {
 <h2>Angaben gemäß § 5 DDG</h2>
 <p>${esc(site.fullName)}<br>Inhaberin: ${esc(site.owner)}<br>${esc(site.street)}<br>${esc(site.zip)} ${esc(site.city)}</p>
 <h2>Kontakt</h2>
-<p>Telefon: <a href="tel:${site.phoneIntl}">${esc(site.phone)}</a><br>E-Mail: <a href="mailto:${site.email}">${esc(site.email)}</a></p>
+<p>Telefon: <a href="tel:${site.phoneIntl}">${esc(site.phone)}</a><br>E-Mail: <a href="mailto:${site.emailAscii}">${esc(site.email)}</a></p>
 <h2>Umsatzsteuer</h2>
 <p>Kleinunternehmerin gemäß § 19 UStG. Es wird keine Umsatzsteuer berechnet und daher keine Umsatzsteuer-Identifikationsnummer angegeben.</p>
 <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
@@ -310,7 +310,7 @@ function datenschutz() {
 <p>Der Schutz Ihrer Daten ist mir wichtig. Hier erfahren Sie, welche Daten beim Besuch dieser Website und bei einer Zusammenarbeit verarbeitet werden, wozu und wie lange.</p>
 
 <h2>1. Verantwortliche</h2>
-<p>${esc(site.owner)}, ${esc(site.fullName)}, ${esc(site.street)}, ${esc(site.zip)} ${esc(site.city)}<br>E-Mail: <a href="mailto:${site.email}">${esc(site.email)}</a>, Telefon: ${esc(site.phone)}</p>
+<p>${esc(site.owner)}, ${esc(site.fullName)}, ${esc(site.street)}, ${esc(site.zip)} ${esc(site.city)}<br>E-Mail: <a href="mailto:${site.emailAscii}">${esc(site.email)}</a>, Telefon: ${esc(site.phone)}</p>
 <p>Eine Datenschutzbeauftragte oder einen Datenschutzbeauftragten muss ich nicht benennen.</p>
 
 <h2>2. Hosting, Server-Logdateien und Sicherheit</h2>
@@ -343,7 +343,7 @@ ${lokalHinweis}
 <p>Ihre Daten erhalten nur, soweit nötig: Hostinger als Auftragsverarbeiter (Hosting, Datenbank, E-Mail), meine Bank (Zahlungen), meine Steuerberatung (Buchhaltung) sowie Behörden, wenn ich gesetzlich dazu verpflichtet bin. Ich verkaufe keine Daten und gebe sie nicht zu Werbezwecken weiter.</p>
 
 <h2>9. Ihre Rechte</h2>
-<p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20). Eine Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3). Eine kurze E-Mail an <a href="mailto:${site.email}">${esc(site.email)}</a> genügt.</p>
+<p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20). Eine Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3). Eine kurze E-Mail an <a href="mailto:${site.emailAscii}">${esc(site.email)}</a> genügt.</p>
 <p><b>Widerspruchsrecht (Art. 21 DSGVO):</b> Verarbeite ich Daten auf Grundlage eines berechtigten Interesses, können Sie dem aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit widersprechen.</p>
 <p>Sie können sich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel beim Hessischen Beauftragten für Datenschutz und Informationsfreiheit, Postfach 3163, 65021 Wiesbaden, <a href="https://datenschutz.hessen.de" rel="noopener">datenschutz.hessen.de</a>.</p>
 <p class="fine">Stand: Oktober 2026</p>

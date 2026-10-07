@@ -184,7 +184,7 @@ app.post('/api/erklaerung', express.urlencoded({ extended: false, limit: '20kb' 
   const kind = b.art === 'widerruf' ? 'widerruf' : 'kuendigung';
   const k = legal.ERKL[kind];
   const fail = (status, msg) => res.status(status).type('html').send(
-    `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${k.label}</title><link rel="stylesheet" href="/css/site.css"><main style="padding:40px 20px;max-width:640px;margin:auto"><h1>Das hat nicht geklappt</h1><p>${msg}</p><p><a href="${k.path}">Zurück zum Formular</a> oder per E-Mail an <a href="mailto:${site.email}">${site.email}</a></p></main>`,
+    `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>${k.label}</title><link rel="stylesheet" href="/css/site.css"><main style="padding:40px 20px;max-width:640px;margin:auto"><h1>Das hat nicht geklappt</h1><p>${msg}</p><p><a href="${k.path}">Zurück zum Formular</a> oder per E-Mail an <a href="mailto:${site.emailAscii}">${site.email}</a></p></main>`,
   );
   if (b.website) return res.redirect(303, k.path); // Spam-Falle
   if (rateLimited(req.ip)) return fail(429, 'Zu viele Anfragen in kurzer Zeit. Bitte versuchen Sie es später noch einmal.');
