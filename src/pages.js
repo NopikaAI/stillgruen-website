@@ -278,6 +278,8 @@ function impressum() {
 <p>Kleinunternehmerin gemäß § 19 UStG. Es wird keine Umsatzsteuer berechnet und daher keine Umsatzsteuer-Identifikationsnummer angegeben.</p>
 <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
 <p>${esc(site.owner)}, Anschrift wie oben.</p>
+<h2>Geltungsbereich</h2>
+<p>Dieses Impressum gilt auch für die Facebook-Gruppe „Grabpflege &amp; Grabschmuck Rhein-Main – Austausch und Tipps“ und das Google-Unternehmensprofil von ${esc(site.fullName)}.</p>
 <h2>Verbraucherstreitbeilegung</h2>
 <p>Ich bin nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 <h2>Haftung für Links</h2>
@@ -294,13 +296,13 @@ const lokalHinweis = `<p>Wenn Sie die Schaltfläche „A+“ (Schrift vergröße
 
 // Wird nur angezeigt, wenn GA_ID oder GOOGLE_ADS_ID gesetzt ist.
 function cookiesMitGoogle() {
-  return `<h2 id="cookies">7. Cookie-Einstellungen, Google Analytics und Google Ads</h2>
+  return `<h2 id="cookies">8. Cookie-Einstellungen, Google Analytics und Google Ads</h2>
 <p>Schriften und Bilder werden vom eigenen Server geladen. Dienste von Google nutze ich nur, wenn Sie im Einwilligungs-Banner zustimmen (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Ohne Ihre Zustimmung wird nichts von Google geladen. Ihre Auswahl können Sie jederzeit ändern oder widerrufen:</p>
 <p><button class="btn primary" type="button" data-consent-open>Cookie-Einstellungen öffnen</button></p>
-${tracking.ga ? `<p><b>Google Analytics 4</b> (Statistik): zählt, welche Seiten aufgerufen werden, wie lange und von welchem Gerätetyp, damit ich die Website verbessern kann. Die IP-Adresse wird gekürzt. Dabei werden Cookies (zum Beispiel „_ga“) gesetzt; die Daten werden nach 14 Monaten gelöscht.</p>` : ''}
+${tracking.ga ? `<p><b>Google Analytics 4</b> (Statistik): zeigt mir, welche Seiten aufgerufen werden, wie lange, von welchem Gerätetyp und aus welcher Region, damit ich die Website verbessern kann. Dafür wird in Ihrem Browser eine zufällige Kennung in Cookies gespeichert („_ga“ und „_ga_…“, Laufzeit bis zu 2 Jahre). Google Analytics 4 speichert keine IP-Adressen; die IP-Adresse wird nur kurz genutzt, um Land und Region zu bestimmen, und danach verworfen. Google Signals (geräteübergreifende Auswertung) und personalisierte Werbung sind ausgeschaltet. Die Auswertungsdaten werden nach 14 Monaten gelöscht. Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG).</p>` : ''}
 ${tracking.ads ? `<p><b>Google Ads Conversion-Messung</b> (Marketing): misst, ob jemand nach dem Klick auf eine meiner Anzeigen eine Anfrage gestellt hat. Dafür werden Cookies (zum Beispiel „_gcl_au“) gesetzt. Personalisierte Werbung wird nicht aktiviert.</p>` : ''}
-<p>Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Daten können an Google LLC in den USA übertragen werden. Google ist unter dem EU-US Data Privacy Framework zertifiziert. Mit Google besteht eine Vereinbarung zur Auftragsverarbeitung. Mehr unter <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a>.</p>
-<p>Ihre Auswahl im Banner wird in Ihrem Browser gespeichert (Local Storage), damit das Banner nicht bei jedem Seitenaufruf erscheint (§ 25 Abs. 2 Nr. 2 TDDDG).</p>
+<p>Anbieter ist Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Daten können an Google LLC in den USA übertragen werden. Google ist unter dem EU-US Data Privacy Framework zertifiziert, für die USA besteht damit ein Angemessenheitsbeschluss der EU-Kommission (Art. 45 DSGVO). Mit Google besteht eine Vereinbarung zur Auftragsverarbeitung. Mehr unter <a href="https://policies.google.com/privacy" rel="noopener">policies.google.com/privacy</a>.</p>
+<p>Ihre Auswahl im Banner wird mit Datum in Ihrem Browser gespeichert (Local Storage), damit das Banner nicht bei jedem Seitenaufruf erscheint und ich Ihre Einwilligung nachweisen kann (§ 25 Abs. 2 Nr. 2 TDDDG, Art. 7 Abs. 1 DSGVO). Widerrufen Sie Ihre Einwilligung, werden die Google-Cookies dieser Website gelöscht und Google wird nicht mehr geladen.</p>
 ${lokalHinweis}`;
 }
 
@@ -333,16 +335,20 @@ function datenschutz() {
 <h2>6. WhatsApp</h2>
 <p>Der WhatsApp-Knopf ist ein einfacher Link. Erst wenn Sie ihn anklicken, öffnet sich WhatsApp, ein Dienst der WhatsApp Ireland Limited, Merrion Road, Dublin 4, Irland. Dabei können Daten auch an die Muttergesellschaft Meta Platforms Inc. in den USA übermittelt werden. Die USA verfügen mit dem EU-US Data Privacy Framework über einen Angemessenheitsbeschluss der EU-Kommission. Fotoberichte schicke ich per WhatsApp nur, wenn Sie das ausdrücklich wünschen (Art. 6 Abs. 1 lit. a DSGVO). Andernfalls erhalten Sie die Fotos per E-Mail.</p>
 
-${tracking.enabled ? cookiesMitGoogle() : `<h2 id="cookies">7. Cookie-Einstellungen: keine Cookies, kein Tracking, keine KI-Dienste</h2>
+<h2 id="social">7. Facebook-Gruppe und Google-Unternehmensprofil</h2>
+<p><b>Facebook-Gruppe:</b> Ich betreue die Facebook-Gruppe „Grabpflege &amp; Grabschmuck Rhein-Main – Austausch und Tipps“. Betreiberin der Plattform ist die Meta Platforms Ireland Limited, Merrion Road, Dublin 4, Irland. Meta verarbeitet Ihre Daten nach eigenen Regeln, auch in den USA (<a href="https://www.facebook.com/privacy/policy" rel="noopener">facebook.com/privacy/policy</a>); darauf habe ich keinen Einfluss. Als Administratorin sehe ich Ihren öffentlichen Profilnamen und Ihr Profilbild, Ihre Antworten auf die Beitrittsfragen sowie Ihre Beiträge und Kommentare in der Gruppe. Ich nutze diese Angaben nur, um die Gruppe zu betreuen und Beitrittsanfragen zu prüfen (Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an einer geschützten, werbefreien Gruppe). Ich exportiere keine Mitgliederdaten und schreibe Mitglieder nicht ungefragt zu Werbezwecken an. Ihre Rechte können Sie bei mir oder direkt bei Meta geltend machen.</p>
+<p><b>Google-Unternehmensprofil:</b> Bewertungen, Fragen und Nachrichten, die Sie mir über Google Maps oder die Google-Suche schicken, verarbeitet Google (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland) nach eigenen Regeln. Ich sehe Ihren Google-Namen und Ihren Text und nutze ihn nur, um zu antworten (Art. 6 Abs. 1 lit. f DSGVO).</p>
+
+${tracking.enabled ? cookiesMitGoogle() : `<h2 id="cookies">8. Cookie-Einstellungen: keine Cookies, kein Tracking, keine KI-Dienste</h2>
 <p>Diese Website setzt keine Cookies und verwendet keine Analyse-, Werbe- oder Social-Media-Dienste. Schriften und Bilder werden vom eigenen Server geladen, es werden keine Daten an Google Fonts oder ähnliche Dienste übertragen.</p>
 ${lokalHinweis}
 <p>Da keine Cookies und keine einwilligungspflichtigen Dienste eingesetzt werden, ist kein Cookie-Banner nötig. Sollte sich das ändern, frage ich vorher um Ihre Einwilligung.</p>`}
 <p>Ihre Daten werden nicht mit KI-Diensten verarbeitet, und es findet keine automatisierte Entscheidungsfindung statt (Art. 22 DSGVO). Mehr zum Einsatz von KI bei der Erstellung dieser Website steht im <a href="/impressum/#ki">Impressum</a>.</p>
 
-<h2>8. Empfänger</h2>
-<p>Ihre Daten erhalten nur, soweit nötig: Hostinger als Auftragsverarbeiter (Hosting, Datenbank, E-Mail), meine Bank (Zahlungen), meine Steuerberatung (Buchhaltung) sowie Behörden, wenn ich gesetzlich dazu verpflichtet bin. Ich verkaufe keine Daten und gebe sie nicht zu Werbezwecken weiter.</p>
+<h2>9. Empfänger</h2>
+<p>Ihre Daten erhalten nur, soweit nötig: Hostinger als Auftragsverarbeiter (Hosting, Datenbank, E-Mail)${tracking.enabled ? ', Google als Auftragsverarbeiter für die Statistik (nur mit Ihrer Einwilligung)' : ''}, meine Bank (Zahlungen), meine Steuerberatung (Buchhaltung) sowie Behörden, wenn ich gesetzlich dazu verpflichtet bin. Ich verkaufe keine Daten und gebe sie nicht zu Werbezwecken weiter.</p>
 
-<h2>9. Ihre Rechte</h2>
+<h2>10. Ihre Rechte</h2>
 <p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18) und Datenübertragbarkeit (Art. 20). Eine Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen (Art. 7 Abs. 3). Eine kurze E-Mail an <a href="mailto:${site.emailAscii}">${esc(site.email)}</a> genügt.</p>
 <p><b>Widerspruchsrecht (Art. 21 DSGVO):</b> Verarbeite ich Daten auf Grundlage eines berechtigten Interesses, können Sie dem aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit widersprechen.</p>
 <p>Sie können sich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel beim Hessischen Beauftragten für Datenschutz und Informationsfreiheit, Postfach 3163, 65021 Wiesbaden, <a href="https://datenschutz.hessen.de" rel="noopener">datenschutz.hessen.de</a>.</p>

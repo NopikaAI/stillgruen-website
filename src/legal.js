@@ -57,7 +57,7 @@ function agb() {
 <p>Verbraucherinnen und Verbrauchern steht ein gesetzliches Widerrufsrecht zu. Einzelheiten finden Sie in der <a href="/widerrufsbelehrung/">Widerrufsbelehrung</a>. Widerrufen können Sie auch über die Schaltfläche <a href="/vertrag-widerrufen/">„Vertrag widerrufen“</a> unten auf jeder Seite.</p>
 
 <h2>11. Streitbeilegung und Schlussbestimmungen</h2>
-<p>Stillgrün ist nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Es gilt deutsches Recht. Bei Verbraucherinnen und Verbrauchern gilt diese Rechtswahl nur, soweit dadurch nicht der Schutz durch zwingende Vorschriften des Staates entzogen wird, in dem sie ihren gewöhnlichen Aufenthalt haben. Sollte eine Bestimmung unwirksam sein, bleibt der Vertrag im Übrigen wirksam.</p>
+<p>Stillgrün ist nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Vertragssprache ist Deutsch. Es gilt deutsches Recht. Bei Verbraucherinnen und Verbrauchern gilt diese Rechtswahl nur, soweit dadurch nicht der Schutz durch zwingende Vorschriften des Staates entzogen wird, in dem sie ihren gewöhnlichen Aufenthalt haben. Sollte eine Bestimmung unwirksam sein, bleibt der Vertrag im Übrigen wirksam.</p>
 <p class="fine">Stand: ${STAND}</p>`);
 }
 

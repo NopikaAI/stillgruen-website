@@ -25,7 +25,7 @@ const NAV = [
 // Einwilligungs-Banner (nur aktiv, wenn GA_ID oder GOOGLE_ADS_ID gesetzt ist)
 function consentBanner() {
   const opts = [
-    tracking.ga ? '<label class="chk"><input type="checkbox" id="cStats">Statistik: Google Analytics zählt anonym, welche Seiten besucht werden.</label>' : '',
+    tracking.ga ? '<label class="chk"><input type="checkbox" id="cStats">Statistik: Google Analytics zeigt mir mit Cookies, welche Seiten besucht werden.</label>' : '',
     tracking.ads ? '<label class="chk"><input type="checkbox" id="cAds">Marketing: Google Ads misst, ob eine Anzeige zu einer Anfrage geführt hat.</label>' : '',
   ].join('');
   return `<div class="consent" id="consent" role="dialog" aria-modal="false" aria-labelledby="consentT" hidden data-ga="${esc(tracking.ga)}" data-ads="${esc(tracking.ads)}">
@@ -95,6 +95,6 @@ ${tracking.enabled ? consentBanner() : ''}
 </body>
 </html>`;
 }
-layout.version = '5';
+layout.version = '6';
 
 module.exports = { layout, esc };

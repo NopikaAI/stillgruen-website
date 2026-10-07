@@ -31,16 +31,26 @@
       ad_user_data: c.ads ? 'granted' : 'denied',
       ad_personalization: 'denied'
     });
-    if (GA && c.stats) gtag('config', GA, { anonymize_ip: true });
+    if (GA && c.stats) gtag('config', GA, { allow_google_signals: false, allow_ad_personalization_signals: false });
     if (ADS && c.ads) gtag('config', ADS);
   }
 
+  // Google-Cookies dieser Website löschen (bei Widerruf).
+  function dropCookies() {
+    var host = location.hostname, parts = host.split('.'), domains = ['', host];
+    for (var i = 1; i < parts.length - 1; i++) domains.push('.' + parts.slice(i).join('.'));
+    document.cookie.split(';').forEach(function (kv) {
+      var name = kv.split('=')[0].trim();
+      if (!/^(_ga|_gid|_gat|_gcl)/.test(name)) return;
+      domains.forEach(function (d) { document.cookie = name + '=; Max-Age=0; path=/' + (d ? '; domain=' + d : ''); });
+    });
+  }
   function save(stats, ads) {
     var c = { v: VERSION, stats: !!(GA && stats), ads: !!(ADS && ads), t: new Date().toISOString() };
     var before = read();
     write(c); box.hidden = true;
     // Wurde eine Einwilligung zurückgenommen, Seite neu laden, damit Google nicht weiterläuft.
-    if (before && ((before.stats && !c.stats) || (before.ads && !c.ads))) { location.reload(); return; }
+    if (before && ((before.stats && !c.stats) || (before.ads && !c.ads))) { dropCookies(); location.reload(); return; }
     apply(c);
   }
   function open(full) {
