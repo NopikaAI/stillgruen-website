@@ -266,6 +266,142 @@ ${cta()}
   });
 }
 
+// ---------- Ratgeber ----------
+const ARTIKEL = [
+  {
+    path: '/ratgeber/winterabdeckung-grab/',
+    title: 'Winterabdeckung fürs Grab: wann und wie',
+    teaser: 'Wann das Tannengrün aufs Grab gehört, welche Zweige sich eignen und wann die Abdeckung im Frühjahr wieder herunterkommt.',
+    date: '2026-10-08',
+  },
+  {
+    path: '/ratgeber/grabbepflanzung-herbst/',
+    title: 'Herbstbepflanzung fürs Grab: Pflanzen und Tipps',
+    teaser: 'Welche Pflanzen im Herbst auf dem Grab lange schön bleiben, wie Sie richtig pflanzen und warum jetzt die Zwiebeln für das Frühjahr in die Erde gehören.',
+    date: '2026-10-08',
+  },
+];
+const ratgeberLink = '<p class="fine">Mehr Tipps finden Sie im <a href="/ratgeber/">Ratgeber</a>.</p>';
+const artikelSchema = (a, items) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: a.title,
+  description: a.teaser,
+  datePublished: a.date,
+  dateModified: a.date,
+  inLanguage: 'de-DE',
+  mainEntityOfPage: site.url + a.path,
+  image: [site.url + '/img/og-stillgruen.png'],
+  author: { '@id': ID.biz },
+  publisher: { '@id': ID.biz },
+});
+const artikelSeite = (a, inhalt, faqs) => {
+  const items = [['Startseite', '/'], ['Ratgeber', '/ratgeber/'], [a.title.split(':')[0], a.path]];
+  const datum = new Date(a.date).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
+  const body = `<section><div class="in"><div class="prose">
+${crumbHtml(items)}
+<span class="eyebrow">Ratgeber · ${datum}</span>
+<h1>${a.title}</h1>
+${inhalt}
+<h2>Häufige Fragen</h2>
+<div>${faqHtml(faqs)}</div>
+${ratgeberLink}
+</div></div></section>`;
+  return layout({
+    title: `${a.title} | Stillgrün`,
+    description: a.teaser,
+    pathName: a.path,
+    body,
+    schema: [business, crumbs(items), artikelSchema(a), faqSchema(faqs)],
+  });
+};
+
+function ratgeber() {
+  const items = [['Startseite', '/'], ['Ratgeber', '/ratgeber/']];
+  const body = `<section><div class="in"><div class="prose">
+${crumbHtml(items)}
+<span class="eyebrow">Ratgeber Grabpflege</span>
+<h1>Tipps zur Grabpflege durch das Jahr</h1>
+<p class="lead">Hier schreibe ich auf, was ich bei der Pflege von Gräbern und Urnengräbern immer wieder gefragt werde: was wann zu tun ist, welche Pflanzen sich bewähren und worauf Sie achten sollten.</p>
+<div style="display:grid;gap:14px">
+${ARTIKEL.map((a) => `<a class="card" href="${a.path}" style="text-decoration:none;color:inherit"><h2 style="margin:0;font-size:1.3rem">${a.title}</h2><p style="margin:0">${a.teaser}</p><span style="color:var(--salbei-d);font-weight:600">Weiterlesen ›</span></a>`).join('\n')}
+</div>
+<p>Weitere Artikel folgen im Lauf der Jahreszeiten.</p>
+</div></div></section>`;
+  return layout({
+    title: 'Ratgeber Grabpflege: Tipps durch das Jahr | Stillgrün',
+    description: 'Praktische Tipps zur Grabpflege: Winterabdeckung, Herbstbepflanzung und was im Lauf des Jahres auf dem Grab zu tun ist.',
+    pathName: '/ratgeber/',
+    body,
+    schema: [business, crumbs(items)],
+  });
+}
+
+const winterFaqs = [
+  ['Wann deckt man ein Grab im Winter ab?', 'Wenn die ersten Nachtfröste kommen. In Frankfurt ist das meist Mitte bis Ende November. Viele legen das Tannengrün um Totensonntag auf.'],
+  ['Welche Zweige eignen sich für die Grababdeckung?', 'Am besten Nordmanntanne oder Edeltanne (Nobilis). Die Nadeln halten lange, und die Zweige sehen den ganzen Winter ordentlich aus. Fichtenzweige verlieren schnell ihre Nadeln.'],
+  ['Wann nimmt man die Winterabdeckung wieder ab?', 'Im März, wenn keine starken Fröste mehr zu erwarten sind. Am besten nach und nach und an einem bedeckten Tag, damit sich die Pflanzen langsam wieder an Licht und Sonne gewöhnen.'],
+  ['Muss man ein Grab im Winter gießen?', 'Ja, an frostfreien Tagen, wenn es länger trocken war. Immergrüne Pflanzen verdunsten auch im Winter Wasser. Bei gefrorenem Boden können sie es nicht aufnehmen und vertrocknen.'],
+];
+function winterabdeckung() {
+  const a = ARTIKEL[0];
+  return artikelSeite(a, `<p class="lead">Eine Abdeckung mit Tannenzweigen schützt die Grabbepflanzung durch den Winter. Wichtig ist der richtige Zeitpunkt: Zu früh schadet sie mehr, als sie nützt.</p>
+<h2>Wozu ist die Winterabdeckung gut?</h2>
+<p>Tannengrün schützt weniger vor Kälte als vor Wintersonne und Austrocknung. Scheint die Sonne auf gefrorenen Boden, verdunsten immergrüne Pflanzen wie Bodendecker oder kleine Gehölze Wasser, das sie aus der gefrorenen Erde nicht nachholen können. Die Zweige spenden Schatten, halten Wind ab und verhindern, dass der Boden ständig friert und taut. Außerdem sieht das Grab auch im Winter gepflegt aus.</p>
+<h2>Der richtige Zeitpunkt</h2>
+<p>Decken Sie erst ab, wenn die ersten Nachtfröste da sind. In Frankfurt ist das meist Mitte bis Ende November. Liegen die Zweige zu früh auf feuchter, warmer Erde, fangen Pflanzen an zu faulen, und Mäuse finden ein bequemes Winterquartier.</p>
+<h2>So gehen Sie vor</h2>
+<ul>
+<li><b>Abräumen:</b> Verblühte Sommer- und Herbstblumen, Laub und Unkraut entfernen. Bodendecker und Stauden bleiben stehen.</li>
+<li><b>Gießen:</b> War der Herbst trocken, das Grab vorher noch einmal gründlich wässern.</li>
+<li><b>Zweige wählen:</b> Nordmanntanne oder Edeltanne (Nobilis) halten ihre Nadeln den ganzen Winter. Fichte nadelt schnell.</li>
+<li><b>Auflegen:</b> Die Zweige wie Dachziegel überlappend legen, am Fußende beginnen und zum Grabstein hin arbeiten. So liegen die Schnittstellen verdeckt und das Wasser läuft ab.</li>
+<li><b>Nicht zu dick:</b> Eine Lage reicht. Luft und Regen sollen noch durchkommen.</li>
+<li><b>Schmuck ergänzen:</b> Zapfen, Moos, Hagebutten oder ein Gesteck machen das Grab für Totensonntag und Advent festlich.</li>
+</ul>
+<p>Beachten Sie die Friedhofsordnung Ihres Friedhofs. Dort steht manchmal, welcher Grabschmuck erlaubt ist und wann Gestecke wieder abgeräumt werden müssen.</p>
+<h2>Im Frühjahr: Abdeckung abnehmen</h2>
+<p>Im März, wenn keine starken Fröste mehr kommen, nehmen Sie die Zweige ab, am besten in zwei Schritten und an einem bedeckten Tag. Danach lockern Sie die Erde, schneiden Erfrorenes zurück und bereiten das Grab auf die Frühjahrsbepflanzung vor.</p>
+<h2>Wenn Sie es nicht selbst schaffen</h2>
+<p>Wer weiter weg wohnt oder im November nicht zum Friedhof kommt, kann die Winterabdeckung abgeben. In den Abos von Stillgrün ist die Winterabdeckung mit Tannengrün im November enthalten, mit Fotos nach dem Besuch.</p>
+${cta()}`, winterFaqs);
+}
+
+const herbstFaqs = [
+  ['Wann pflanzt man ein Grab im Herbst neu?', 'Von Mitte September bis Ende Oktober. Dann ist der Boden noch warm, und die Pflanzen wurzeln vor dem ersten Frost gut an.'],
+  ['Welche Pflanzen halten auf dem Grab bis in den Winter?', 'Besonders robust sind Knospenheide (Calluna), Hornveilchen und Stiefmütterchen, Purpurglöckchen, Scheinbeere und kleine Gräser wie Segge. Silberblatt hält in milden Wintern lange.'],
+  ['Sind Chrysanthemen eine gute Wahl fürs Grab?', 'Sie blühen schön, vertragen aber meist keinen stärkeren Frost. Für Allerheiligen sind sie gut, für eine Bepflanzung bis ins Frühjahr eher nicht.'],
+  ['Kann man im Herbst Blumenzwiebeln aufs Grab setzen?', 'Ja, Oktober ist die beste Zeit. Krokusse, Traubenhyazinthen und kleine Narzissen blühen im Frühjahr zwischen der Herbstbepflanzung hervor.'],
+];
+function herbstbepflanzung() {
+  const a = ARTIKEL[1];
+  return artikelSeite(a, `<p class="lead">Wenn die Sommerblumen nachlassen, ist Zeit für die Herbstbepflanzung. Mit den richtigen Pflanzen sieht das Grab bis in den Winter gepflegt aus, und mit ein paar Blumenzwiebeln blüht es im Frühjahr schon früh.</p>
+<h2>Der richtige Zeitpunkt</h2>
+<p>Gepflanzt wird von Mitte September bis Ende Oktober. Der Boden ist dann noch warm, es regnet häufiger, und die Pflanzen wurzeln gut an, bevor der Frost kommt. Wer zu Allerheiligen ein schönes Grab möchte, pflanzt am besten Mitte Oktober.</p>
+<h2>Bewährte Pflanzen für den Herbst</h2>
+<ul>
+<li><b>Knospenheide (Calluna):</b> Der Klassiker. Die Knospen öffnen sich nicht und bleiben deshalb bis in den Winter farbig, in Weiß, Rosa oder Rot.</li>
+<li><b>Hornveilchen und Stiefmütterchen:</b> Blühen bei milder Witterung den ganzen Winter und noch einmal kräftig im Frühjahr.</li>
+<li><b>Silberblatt:</b> Silbergraues Laub, das zwischen Heide schön leuchtet. Hält in milden Wintern lange.</li>
+<li><b>Purpurglöckchen (Heuchera):</b> Laub in Rot, Bronze oder Limettengrün, winterhart und mehrjährig.</li>
+<li><b>Scheinbeere (Gaultheria):</b> Rote Beeren und immergrünes Laub, passt gut in die Adventszeit.</li>
+<li><b>Kleine Gräser:</b> Segge (Carex) oder Blauschwingel bringen Ruhe und Struktur in die Pflanzung.</li>
+</ul>
+<h2>So pflanzen Sie richtig</h2>
+<ul>
+<li>Die Sommerbepflanzung ganz herausnehmen, auch die Wurzeln.</li>
+<li>Die Erde lockern und bei Bedarf etwas frische Pflanzerde einarbeiten.</li>
+<li>Die Pflanzen vorher in einen Eimer Wasser stellen, bis keine Blasen mehr aufsteigen.</li>
+<li>Nicht zu eng setzen. Im Herbst wachsen Pflanzen kaum noch zu, ein dichter Eindruck entsteht daher eher durch die Wahl der Größe als durch Menge.</li>
+<li>Nach dem Pflanzen gründlich angießen, danach nur bei Trockenheit.</li>
+</ul>
+<h2>Jetzt schon an das Frühjahr denken</h2>
+<p>Setzen Sie im Oktober zwischen die Herbstpflanzen ein paar Blumenzwiebeln: Krokusse, Traubenhyazinthen, Schneeglöckchen oder kleine Narzissen. Als Faustregel kommen die Zwiebeln etwa doppelt so tief in die Erde, wie sie hoch sind. Im März blühen sie dann zwischen Heide und Hornveilchen hervor.</p>
+<h2>Wenn Sie es nicht selbst schaffen</h2>
+<p>In den Abos von Stillgrün ist die Wechselbepflanzung mit Saisonpflanzen enthalten, Pflanzen und Erde inklusive. Sie bekommen nach jedem Besuch Fotos und sehen, wie das Grab aussieht.</p>
+${cta()}`, herbstFaqs);
+}
+
 // ---------- Rechtliches ----------
 function impressum() {
   const body = `<section><div class="in"><div class="prose">
@@ -361,7 +497,7 @@ function notFound() {
   const body = `<section><div class="in"><div class="prose">
 <h1>Diese Seite gibt es nicht</h1>
 <p>Vielleicht hilft Ihnen einer dieser Links weiter:</p>
-<ul><li><a href="/">Startseite</a></li><li><a href="/grabpflege-kosten/">Grabpflege Kosten</a></li><li><a href="/grabpflege-frankfurt/">Grabpflege in Frankfurt</a></li><li><a href="/urnenpflege-frankfurt/">Urnenpflege in Frankfurt</a></li></ul>
+<ul><li><a href="/">Startseite</a></li><li><a href="/grabpflege-kosten/">Grabpflege Kosten</a></li><li><a href="/grabpflege-frankfurt/">Grabpflege in Frankfurt</a></li><li><a href="/urnenpflege-frankfurt/">Urnenpflege in Frankfurt</a></li><li><a href="/ratgeber/">Ratgeber Grabpflege</a></li></ul>
 </div></div></section>`;
   return layout({ title: 'Seite nicht gefunden | Stillgrün', description: 'Diese Seite wurde nicht gefunden.', pathName: '/404', body, noindex: true });
 }
@@ -371,6 +507,9 @@ const PAGES = {
   '/grabpflege-kosten/': { render: kosten, priority: '0.9' },
   '/grabpflege-frankfurt/': { render: frankfurt, priority: '0.9' },
   '/urnenpflege-frankfurt/': { render: urne, priority: '0.9' },
+  '/ratgeber/': { render: ratgeber, priority: '0.7' },
+  '/ratgeber/winterabdeckung-grab/': { render: winterabdeckung, priority: '0.6' },
+  '/ratgeber/grabbepflanzung-herbst/': { render: herbstbepflanzung, priority: '0.6' },
   '/impressum/': { render: impressum, priority: '0.2' },
   '/datenschutz/': { render: datenschutz, priority: '0.2' },
   '/agb/': { render: legal.agb, priority: '0.2' },

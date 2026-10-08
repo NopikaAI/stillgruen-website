@@ -85,7 +85,7 @@ ${body}
 </main>
 <footer><div class="in">
   <div style="display:grid;gap:14px"><a class="logo" href="/" aria-label="Stillgrün Startseite">${LOGO_NEG}</a><p style="color:#C7D0CA">Verlässliche Grab- und Urnenpflege mit Fotobericht in Frankfurt am Main.</p></div>
-  <div style="display:grid;gap:6px;align-content:start"><b>Angebot</b><a href="/grabpflege-frankfurt/">Grabpflege in Frankfurt</a><a href="/urnenpflege-frankfurt/">Urnenpflege in Frankfurt</a><a href="/grabpflege-kosten/">Grabpflege Kosten</a><a href="/#faq">Häufige Fragen</a><a href="/#kontakt">Kontakt</a></div>
+  <div style="display:grid;gap:6px;align-content:start"><b>Angebot</b><a href="/grabpflege-frankfurt/">Grabpflege in Frankfurt</a><a href="/urnenpflege-frankfurt/">Urnenpflege in Frankfurt</a><a href="/grabpflege-kosten/">Grabpflege Kosten</a><a href="/ratgeber/">Ratgeber</a><a href="/#faq">Häufige Fragen</a><a href="/#kontakt">Kontakt</a></div>
   <div style="display:grid;gap:6px;align-content:start"><b>Rechtliches</b><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a><a href="/datenschutz/#cookies" data-consent-open>Cookie-Einstellungen</a><a href="/agb/">AGB</a><a href="/widerrufsbelehrung/">Widerrufsbelehrung</a><a href="/vertraege-kuendigen/">Verträge hier kündigen</a><a href="/vertrag-widerrufen/">Vertrag widerrufen</a></div>
   <small>© ${new Date().getFullYear()} ${esc(site.fullName)} · ${esc(site.owner)} · Gemäß § 19 UStG wird keine Umsatzsteuer berechnet. Texte und Grafiken mit KI-Unterstützung erstellt und von der Inhaberin geprüft, Fotos echt (<a href="/impressum/#ki" style="color:inherit">KI-Hinweis</a>).</small>
 </div></footer>

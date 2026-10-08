@@ -9,7 +9,7 @@ const { PAGES, notFound } = require('./src/pages');
 const { prices } = require('./src/data');
 
 const OUT = path.join(__dirname, 'export');
-const FILE = { '/': 'index.html', '/grabpflege-kosten/': 'grabpflege-kosten.html', '/grabpflege-frankfurt/': 'grabpflege-frankfurt.html', '/urnenpflege-frankfurt/': 'urnenpflege-frankfurt.html', '/impressum/': 'impressum.html', '/datenschutz/': 'datenschutz.html', '/agb/': 'agb.html', '/widerrufsbelehrung/': 'widerrufsbelehrung.html', '/vertraege-kuendigen/': 'vertraege-kuendigen.html', '/vertrag-widerrufen/': 'vertrag-widerrufen.html' };
+const FILE = { '/': 'index.html', '/grabpflege-kosten/': 'grabpflege-kosten.html', '/grabpflege-frankfurt/': 'grabpflege-frankfurt.html', '/urnenpflege-frankfurt/': 'urnenpflege-frankfurt.html', '/ratgeber/': 'ratgeber.html', '/ratgeber/winterabdeckung-grab/': 'ratgeber-winterabdeckung-grab.html', '/ratgeber/grabbepflanzung-herbst/': 'ratgeber-grabbepflanzung-herbst.html', '/impressum/': 'impressum.html', '/datenschutz/': 'datenschutz.html', '/agb/': 'agb.html', '/widerrufsbelehrung/': 'widerrufsbelehrung.html', '/vertraege-kuendigen/': 'vertraege-kuendigen.html', '/vertrag-widerrufen/': 'vertrag-widerrufen.html' };
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
