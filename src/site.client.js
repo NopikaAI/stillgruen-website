@@ -50,6 +50,7 @@
       const r=await fetch(fm.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)});
       const j=await r.json().catch(()=>({}));
       if(!r.ok||!j.ok) throw new Error(j.error||'Fehler');
+      if(fm.action.indexOf('/api/anfrage')>-1&&window.sgAnfrageGesendet)window.sgAnfrageGesendet();
       ok.textContent='Vielen Dank für Ihre Anfrage. Ich melde mich innerhalb von 24 Stunden bei Ihnen.';
       fm.reset();
     }catch(err){

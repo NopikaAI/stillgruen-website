@@ -28,7 +28,7 @@ function consentBanner() {
     tracking.ga ? '<label class="chk"><input type="checkbox" id="cStats">Statistik: Google Analytics zeigt mir mit Cookies, welche Seiten besucht werden.</label>' : '',
     tracking.ads ? '<label class="chk"><input type="checkbox" id="cAds">Marketing: Google Ads misst, ob eine Anzeige zu einer Anfrage geführt hat.</label>' : '',
   ].join('');
-  return `<div class="consent" id="consent" role="dialog" aria-modal="false" aria-labelledby="consentT" hidden data-ga="${esc(tracking.ga)}" data-ads="${esc(tracking.ads)}">
+  return `<div class="consent" id="consent" role="dialog" aria-modal="false" aria-labelledby="consentT" hidden data-ga="${esc(tracking.ga)}" data-ads="${esc(tracking.ads)}" data-ads-label="${esc(tracking.adsLabel)}">
 <p class="h3" id="consentT">Ihre Einwilligung</p>
 <p>Mit Ihrer Einwilligung nutze ich Dienste von Google, um zu verstehen, wie die Website genutzt wird${tracking.ads ? ', und um Anzeigen zu messen' : ''}. Dabei können Daten in die USA übertragen werden. Sie können Ihre Auswahl jederzeit unter „Cookie-Einstellungen“ unten auf jeder Seite ändern. Mehr in der <a href="/datenschutz/#cookies">Datenschutzerklärung</a> und im <a href="/impressum/">Impressum</a>.</p>
 <div class="consent-opts" id="consentOpts" hidden><label class="chk"><input type="checkbox" checked disabled>Notwendig: technisch erforderlich, immer aktiv.</label>${opts}</div>
@@ -95,6 +95,6 @@ ${tracking.enabled ? consentBanner() : ''}
 </body>
 </html>`;
 }
-layout.version = '6';
+layout.version = '7';
 
 module.exports = { layout, esc };

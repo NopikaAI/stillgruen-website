@@ -31,6 +31,7 @@ const prices = {
 const tracking = {
   ga: (process.env.GA_ID || '').trim(),          // z. B. G-XXXXXXXXXX
   ads: (process.env.GOOGLE_ADS_ID || '').trim(), // z. B. AW-123456789
+  adsLabel: (process.env.GOOGLE_ADS_LABEL || '').trim(), // Conversion-Label „Anfrage gesendet“, z. B. AbCdEfGhIj
 };
 tracking.enabled = !!(tracking.ga || tracking.ads);
 

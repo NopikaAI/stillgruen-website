@@ -3,7 +3,7 @@
 (function () {
   var box = document.getElementById('consent');
   if (!box) return;
-  var GA = box.dataset.ga, ADS = box.dataset.ads, KEY = 'sg-consent', VERSION = 1;
+  var GA = box.dataset.ga, ADS = box.dataset.ads, LABEL = box.dataset.adsLabel, KEY = 'sg-consent', VERSION = 1;
   var $ = function (id) { return document.getElementById(id); };
 
   function read() { try { var c = JSON.parse(localStorage.getItem(KEY)); return c && c.v === VERSION ? c : null; } catch (e) { return null; } }
@@ -34,6 +34,14 @@
     if (GA && c.stats) gtag('config', GA, { allow_google_signals: false, allow_ad_personalization_signals: false });
     if (ADS && c.ads) gtag('config', ADS);
   }
+
+  // Erfolgreich gesendete Anfrage melden (nur mit Einwilligung).
+  window.sgAnfrageGesendet = function () {
+    var c = read();
+    if (!c || !loaded) return;
+    if (GA && c.stats) gtag('event', 'generate_lead');
+    if (ADS && LABEL && c.ads) gtag('event', 'conversion', { send_to: ADS + '/' + LABEL });
+  };
 
   // Google-Cookies dieser Website löschen (bei Widerruf).
   function dropCookies() {
