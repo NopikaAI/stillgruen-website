@@ -280,6 +280,12 @@ const ARTIKEL = [
     teaser: 'Welche Pflanzen im Herbst auf dem Grab lange schön bleiben, wie Sie richtig pflanzen und warum jetzt die Zwiebeln für das Frühjahr in die Erde gehören.',
     date: '2026-10-08',
   },
+  {
+    path: '/ratgeber/grabgesteck/',
+    title: 'Grabgesteck für Herbst und Winter: Ideen und Tipps',
+    teaser: 'Welches Gesteck zu Allerheiligen, Totensonntag und Advent passt, welche Größe das Grab braucht und warum viele Friedhöfe nur natürliche Materialien erlauben.',
+    date: '2026-10-09',
+  },
 ];
 const ratgeberLink = '<p class="fine">Mehr Tipps finden Sie im <a href="/ratgeber/">Ratgeber</a>.</p>';
 const artikelSchema = (a, items) => ({
@@ -330,7 +336,7 @@ ${ARTIKEL.map((a) => `<a class="card" href="${a.path}" style="text-decoration:no
 </div></div></section>`;
   return layout({
     title: 'Ratgeber Grabpflege: Tipps durch das Jahr | Stillgrün',
-    description: 'Praktische Tipps zur Grabpflege: Winterabdeckung, Herbstbepflanzung und was im Lauf des Jahres auf dem Grab zu tun ist.',
+    description: 'Praktische Tipps zur Grabpflege: Winterabdeckung, Herbstbepflanzung, Grabgestecke und was im Lauf des Jahres auf dem Grab zu tun ist.',
     pathName: '/ratgeber/',
     body,
     schema: [business, crumbs(items)],
@@ -357,7 +363,7 @@ function winterabdeckung() {
 <li><b>Zweige wählen:</b> Nordmanntanne oder Edeltanne (Nobilis) halten ihre Nadeln den ganzen Winter. Fichte nadelt schnell.</li>
 <li><b>Auflegen:</b> Die Zweige wie Dachziegel überlappend legen, am Fußende beginnen und zum Grabstein hin arbeiten. So liegen die Schnittstellen verdeckt und das Wasser läuft ab.</li>
 <li><b>Nicht zu dick:</b> Eine Lage reicht. Luft und Regen sollen noch durchkommen.</li>
-<li><b>Schmuck ergänzen:</b> Zapfen, Moos, Hagebutten oder ein Gesteck machen das Grab für Totensonntag und Advent festlich.</li>
+<li><b>Schmuck ergänzen:</b> Zapfen, Moos, Hagebutten oder ein <a href="/ratgeber/grabgesteck/">Gesteck</a> machen das Grab für Totensonntag und Advent festlich.</li>
 </ul>
 <p>Beachten Sie die Friedhofsordnung Ihres Friedhofs. Dort steht manchmal, welcher Grabschmuck erlaubt ist und wann Gestecke wieder abgeräumt werden müssen.</p>
 <h2>Im Frühjahr: Abdeckung abnehmen</h2>
@@ -400,6 +406,51 @@ function herbstbepflanzung() {
 <h2>Wenn Sie es nicht selbst schaffen</h2>
 <p>In den Abos von Stillgrün ist die Wechselbepflanzung mit Saisonpflanzen enthalten, Pflanzen und Erde inklusive. Sie bekommen nach jedem Besuch Fotos und sehen, wie das Grab aussieht.</p>
 ${cta()}`, herbstFaqs);
+}
+
+const gesteckFaqs = [
+  ['Wann legt man ein Gesteck aufs Grab?', 'Die üblichen Anlässe sind Allerheiligen am 1. November, Totensonntag am letzten Sonntag vor dem Advent (2026 am 22. November) und die Adventszeit. Dazu kommen Geburts- und Todestage.'],
+  ['Wie lange hält ein Grabgesteck?', 'Ein Gesteck aus Tannengrün, Zapfen und Moos hält bei kühlem Wetter vier bis acht Wochen. Frische Blüten wie Rosen oder Chrysanthemen sehen nach ein bis zwei Wochen nicht mehr schön aus.'],
+  ['Welche Größe sollte ein Grabgesteck haben?', 'Für ein Urnengrab reichen etwa 25 bis 35 Zentimeter, für ein Einzelgrab 40 bis 60 Zentimeter. Bei einem Doppelgrab darf es größer sein oder Sie legen zwei kleinere Gestecke.'],
+  ['Ist Steckschaum auf dem Friedhof erlaubt?', 'Viele Friedhöfe verlangen inzwischen kompostierbaren Grabschmuck. Steckschaum besteht aus Kunststoff und verrottet nicht. Sicherer sind Unterlagen aus Stroh, Moos, Reisig oder Holz. Im Zweifel hilft ein Blick in die Friedhofsordnung.'],
+];
+function grabgesteck() {
+  const a = ARTIKEL[2];
+  return artikelSeite(a, `<p class="lead">Im Herbst und Winter blüht auf dem Grab wenig. Ein Gesteck aus Tannengrün, Zapfen und Beeren bringt dann Farbe und zeigt, dass jemand da war. Mit der richtigen Größe und den richtigen Materialien hält es viele Wochen.</p>
+<h2>Die Anlässe im Herbst und Winter</h2>
+<ul>
+<li><b>Allerheiligen (1. November):</b> Vor allem in katholischen Familien üblich, oft zusammen mit einem Grablicht.</li>
+<li><b>Totensonntag:</b> Der evangelische Gedenktag am letzten Sonntag vor dem Advent, 2026 am 22. November. Für viele Familien der wichtigste Termin für den Grabschmuck.</li>
+<li><b>Advent und Weihnachten:</b> Ein Gesteck mit Zapfen, Ilex oder roten Beeren hält vom Advent bis über die Feiertage.</li>
+</ul>
+<p>Wer nur einmal schmücken möchte, legt das Gesteck um Totensonntag. Dann hält es mit winterfesten Materialien gut bis Weihnachten.</p>
+<h2>Was in ein haltbares Gesteck gehört</h2>
+<ul>
+<li><b>Grün als Grundlage:</b> Nordmanntanne, Edeltanne (Nobilis), Kiefer, Zeder oder Buchsbaum. Diese Zweige halten ihre Nadeln und Blätter wochenlang.</li>
+<li><b>Struktur:</b> Zapfen von Kiefer oder Lärche, Moos, Rindenstücke, kleine Äste.</li>
+<li><b>Farbe:</b> Hagebutten, Ilex mit Beeren, Scheinbeere, getrocknete Lotuskapseln oder Eukalyptus. Christrosen sind die einzigen Blüten, die Frost gut vertragen.</li>
+<li><b>Frische Schnittblumen</b> wie Rosen oder Chrysanthemen sehen schön aus, halten bei Frost aber nur wenige Tage. Sie eignen sich eher für einen bestimmten Gedenktag als für die ganze Saison.</li>
+</ul>
+<h2>Die richtige Größe</h2>
+<p>Das Gesteck sollte zum Grab passen und den Grabstein nicht verdecken. Als Richtwert: <b>Urnengrab 25 bis 35 cm</b>, <b>Einzelgrab 40 bis 60 cm</b>, <b>Doppelgrab bis 80 cm</b> oder zwei kleinere Gestecke links und rechts. Flache, längliche Formen wirken auf liegenden Grabplatten ruhiger als hohe, runde.</p>
+<h2>Was der Friedhof erlaubt</h2>
+<p>Viele Friedhöfe schreiben in ihrer Friedhofsordnung vor, dass Grabschmuck kompostierbar sein muss. Was übrig bleibt, landet auf dem Kompost des Friedhofs. Achten Sie deshalb auf:</p>
+<ul>
+<li>keinen Steckschaum aus Kunststoff, sondern eine Unterlage aus Stroh, Moos, Reisig oder Holz,</li>
+<li>Bindedraht und Schleifen nur sparsam und möglichst aus Naturmaterial wie Jute oder Bast,</li>
+<li>keine Kunstblumen und keine Plastikfiguren.</li>
+</ul>
+<p>Manche Friedhöfe legen auch fest, wann Grabschmuck wieder abgeräumt werden muss. Spätestens wenn das Grün braun wird, gehört das Gesteck weg.</p>
+<h2>So liegt das Gesteck sicher</h2>
+<ul>
+<li>Vor dem Auflegen welke Blätter und Unkraut an der Stelle entfernen.</li>
+<li>Das Gesteck nicht auf empfindliche Pflanzen drücken, sondern auf die Abdeckung oder eine freie Stelle vor dem Stein legen.</li>
+<li>Bei Wind mit zwei kurzen Holzstäben oder Steckhaken im Boden sichern.</li>
+<li>Ein Grablicht immer mit etwas Abstand zum Grün aufstellen.</li>
+</ul>
+<h2>Wenn Sie nicht selbst zum Friedhof kommen</h2>
+<p>Wer weiter weg wohnt oder zu Totensonntag keine Zeit hat, kann das Gesteck bringen lassen. Stillgrün bietet Gestecke und Deko als Einzelleistung ab ${eur(P.gesteck)} an, aus natürlichen Materialien und passend zum Grab. Nach dem Besuch bekommen Sie ein Foto, damit Sie sehen, wie es aussieht.</p>
+${cta()}`, gesteckFaqs);
 }
 
 // ---------- Rechtliches ----------
@@ -510,6 +561,7 @@ const PAGES = {
   '/ratgeber/': { render: ratgeber, priority: '0.7' },
   '/ratgeber/winterabdeckung-grab/': { render: winterabdeckung, priority: '0.6' },
   '/ratgeber/grabbepflanzung-herbst/': { render: herbstbepflanzung, priority: '0.6' },
+  '/ratgeber/grabgesteck/': { render: grabgesteck, priority: '0.6' },
   '/impressum/': { render: impressum, priority: '0.2' },
   '/datenschutz/': { render: datenschutz, priority: '0.2' },
   '/agb/': { render: legal.agb, priority: '0.2' },

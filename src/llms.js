@@ -52,6 +52,6 @@ Rechnung oder Lastschrift. Monatsabo monatlich, Jahresabo und Saisonpaket einmal
 - ${site.url}/grabpflege-kosten/ : alle Preise und Rechenbeispiele
 - ${site.url}/grabpflege-frankfurt/ : Grabpflege in Frankfurt am Main
 - ${site.url}/urnenpflege-frankfurt/ : Urnenpflege und Urnengrabpflege
-- ${site.url}/ratgeber/ : Ratgeber mit Tipps zur Grabpflege (Winterabdeckung, Herbstbepflanzung)
+- ${site.url}/ratgeber/ : Ratgeber mit Tipps zur Grabpflege (Winterabdeckung, Herbstbepflanzung, Grabgesteck)
 - ${site.url}/impressum/ und ${site.url}/datenschutz/
 `;
